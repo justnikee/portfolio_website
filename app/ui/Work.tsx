@@ -5,7 +5,7 @@ type Props = {}
 
 const Work = (props: Props) => {
   return (
-    <div className='flex justify-center sm:py-32 py-4'>
+    <div className='work flex justify-center sm:py-32 py-4'>
     <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
     <div>
         <h2 className='sm:text-[5rem] font-[Heading] uppercase leading-[5rem] text-center mb-16'>Work</h2>
@@ -20,6 +20,7 @@ const Work = (props: Props) => {
     <Card title='Ecommerce Api' description='Api for ecommerce store Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in interdum metus. Vestibulum hendrerit augue porttitor lacus tristique ultricies. Vestibulum id quam quam. Curabitur nec ligula tincidunt, sagittis sem nec, congue turpis.' image={'/main_images/rb_2149379656.png'} stack={["JavaScript", "NodeJs", "ExpressJs", "MongoDB"]} />
     </div>
     </div>
+    <svg aria-hidden="true" className="svg-grid-work"><defs><pattern id="hero" width="80" height="80" x="50%" y="-1" patternUnits="userSpaceOnUse"><path d="M.5 200V.5H200" fill="none"></path></pattern></defs><rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect></svg>
     </div>
   )
 }

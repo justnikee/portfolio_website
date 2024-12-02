@@ -31,8 +31,21 @@ body::before{
   mix-blend-mode: multiply;
   position: absolute;
   background: url('../public/main_images/bg-noise.7485933b.png') 20px 20px repeat;
-
 }
+
+.work{
+  position: relative;
+}
+
+/* .work::before{
+  content: "";
+  inset: 0;
+  z-index: -10;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  position: absolute;
+  background: url('../public/main_images/bg-noise.7485933b.png') 20px 20px repeat;
+} */
 
 @supports(background: paint(something)) {
   body {
@@ -73,6 +86,20 @@ body::before{
     opacity: 1;
 }
 }
+
+
+.svg-grid-work{
+  position: absolute;
+  opacity: 1;
+  z-index: -10;
+  stroke: rgba(255, 250, 245, .06);
+  width: 100%;
+  -webkit-mask-image: radial-gradient(60% 50% at center center,#00143d,transparent);
+  mask-image: radial-gradient(60% 50% at center center,#00143d,transparent);
+  inset: 0;
+  height: 100%;
+}
+
 
 
 @font-face {
@@ -130,3 +157,45 @@ body::before{
   height: 280px;
   object-fit: cover;
 }
+
+
+div#card:hover {
+  box-shadow: 0 0 0 1px #fff,0 6px 0 -2px #fff,0 6px 0 -2px #fff;
+  transform: translateY(-6px);
+}
+
+div#card{
+  transition: 0.5s ease-in-out;
+}
+
+
+.copy_button{
+  background: linear-gradient(#610000 ,#FD511D);
+  transition: 0.3s ease-in-out;
+}
+
+.copy_button:hover {
+  background: linear-gradient(#FD511D, #610000);
+}
+
+
+/* Gradient text style */
+.gradient-text {
+  background-image: linear-gradient(90deg, #732959, #401C33, #A63F8A, #30588C, #00010D);
+  -webkit-background-clip: text;
+color: transparent;
+transition: background-image 1s ease, background-position 1s ease;
+background-size: 200% 100%;
+ background-position: 100% 0;
+  -webkit-transition: background-image 1s ease, background-position 1s ease;
+  -moz-transition: background-image 1s ease, background-position 1s ease;
+  -ms-transition: background-image 1s ease, background-position 1s ease;
+  -o-transition: background-image 1s ease, background-position 1s ease;
+}
+
+/* Hover effect to change the gradient */
+.gradient-text:hover {
+  background-image: linear-gradient(90deg, #ff7f00, #ff0055, #00aaff, #00ff00, #6600ff);
+  background-position: 0 0; /* Move the gradient to the left */
+}
+
