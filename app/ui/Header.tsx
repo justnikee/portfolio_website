@@ -8,7 +8,7 @@ const links = ["About", "Post", "Gallery", "Use", "Work", "Contact"];
 
 const Header = (props: Props) => {
   return (
-    <header className='w-full pt-5'>
+    <header className='w-full pt-5 sticky top-0 z-10'>
         <div className='max-w-[800px] h-[52px] m-auto flex items-center justify-between w-full bg-[hsla(0,0%,5%,.6)] rounded-[100px] py-2 px-6 border border-[#212121]' style={{
             boxShadow: '0 .6px .6px -1.25px rgba(0,0,0,.467),0 2.2px 2.2px -2.5px rgba(0,0,0,.41),0 10px 10px -3.75px rgba(0,0,0,.16)',
             backdropFilter: 'blur(12px)',

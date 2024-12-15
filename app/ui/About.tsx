@@ -6,10 +6,10 @@ type Props = {}
 const About = (props: Props) => {
   return (
     <div className='flex justify-center sm:py-32 py-4'>
-        <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
-            <div className='flex gap-32'>
+        <div className='px-5  sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
+            <div className='flex flex-col gap-8 md:flex-row lg:gap-32'>
                 <div className='flex-1'>
-                      <h3 className='sm:text-[4rem] max-w-[500px] font-[Heading] uppercase leading-[5rem]'>Hi, I'm 
+                      <h3 className='sm:text-[4rem] text-[2.5rem] leading-[3rem] max-w-[500px] font-[Heading] uppercase lg:leading-[5rem]'>Hi, I'm 
                         <span className='text-linkTextColor' style={{
                                background: '-webkit-linear-gradient(#610000, #FD511D)',
                                WebkitBackgroundClip: 'text',
@@ -25,7 +25,7 @@ const About = (props: Props) => {
                      As someone who cooks things for the web, I enjoy blending design and engineering to build seamless and impactful projects.
                     </p>
                     <div>
-                        <Link className='font-[Heading] uppercase text-3xl flex gap-2' href={'/about'}>
+                        <Link className='font-[Heading] uppercase text-2xl sm:text-3xl flex gap-2' href={'/about'}>
                         More about me 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 30 30" fill="none"><path fill="currentColor" d="M0 0h29.998L30 7.058 0 7.06V.001Z"></path><path fill="currentColor" d="M29.998 0 30 30h-7.06V0h7.058Z"></path><path fill="currentColor" d="M27.452 6.757 4.992 29.218 0 24.227l22.46-22.46 4.992 4.99Z"></path></svg>
                         </Link>

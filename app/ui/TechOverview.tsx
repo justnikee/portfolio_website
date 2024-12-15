@@ -4,10 +4,10 @@ type Props = {}
 
 const TechOverview = (props: Props) => {
   return (
-    <div className='sm:py-32 py-4'>
+    <div className='py-32 px-5'>
         <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
             <div>
-                <h2 className='sm:text-[5rem] font-[Heading] uppercase leading-[5rem] text-center'>I Code Memorable Experiences.</h2>
+                <h2 className='text-5xl leading-[3.5rem] sm:text-[5rem] font-[Heading] uppercase sm:leading-[5rem] text-center'>I Code Memorable Experiences.</h2>
             </div>
             <div>
                 <div className="floating-icons mt-14 m-auto flex items-center gap-6 justify-center">

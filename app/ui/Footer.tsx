@@ -79,9 +79,9 @@ const FooterBottom: React.FC = () => {
         ref={animationRef}
         style={{ display: "flex" }} // Ensures spans align horizontally
       >
-        <h4 className='gradient-text -mr-6'>chaos coded beautifully — Jinxx way</h4>
-        <h4 className='gradient-text -mr-6'>chaos coded beautifully — Jinxx way</h4>
-        <h4 className='gradient-text -mr-6'>chaos coded beautifully — Jinxx way</h4>
+        <h4 className='gradient-text -mr-[5.5rem]'>chaos coded beautifully — </h4>
+        <h4 className='gradient-text -mr-[5.5rem]'>chaos coded beautifully — </h4>
+        <h4 className='gradient-text -mr-[5.5rem]'>chaos coded beautifully — </h4>
       </div>
     </div>
   );
@@ -149,12 +149,10 @@ function horizontalLoop(items: HTMLElement[], config: HorizontalLoopConfig): GSA
 }
 
 
-
-
 const EndFooter = () => {
   return(
-      <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto relative w-full'>
-        <div className='py-4 flex justify-between'>
+      <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto relative w-full block before-image-color'>
+        <div className='py-4 pt-8 flex justify-between'>
           <div className='flex-1'>
             <h3 className='font-[outfit]'>© 2024 Nikhil.</h3>
           </div>

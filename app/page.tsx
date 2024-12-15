@@ -9,7 +9,7 @@ import Footer from "./ui/Footer";
 
 export default function Home() {
   return (
-    <div>
+    <>
           <Header/>
           <Hero/>
           <About/>
@@ -18,6 +18,6 @@ export default function Home() {
           <Work/>
           <Contact/>
           <Footer/>
-    </div>
+    </>
   );
 }
