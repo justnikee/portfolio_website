@@ -1,9 +1,14 @@
 "use client";
 import { ReactLenis } from "@studio-freight/react-lenis";
+import { ReactNode } from "react";
 
-function SmoothScrolling({ children }:any) {
+type Props = {
+  children: ReactNode;
+};
+
+function SmoothScrolling({ children }: Props) {
   return (
-    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothTouch: true }}>
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.5 }}>
       {children}
     </ReactLenis>
   );

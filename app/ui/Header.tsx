@@ -5,11 +5,9 @@ import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 
-type Props = {};
-
 const links = ["About", "Uses", "Work", "Post", "Gallery"];
 
-const Header = (props: Props) => {
+const Header = () => {
     const header = useRef<HTMLHeadingElement>(null);
     const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
     const contactRef = useRef<HTMLElement | null>(null);

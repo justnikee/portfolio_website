@@ -1,9 +1,7 @@
 import React from 'react'
 import Card from '../components/Card'
 
-type Props = {}
-
-const Work = (props: Props) => {
+const Work = () => {
   return (
     <div id='Work' className='work flex justify-center py-32 px-4'>
     <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>

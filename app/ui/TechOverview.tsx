@@ -1,9 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-type Props = {}
-
-const TechOverview = (props: Props) => {
+const TechOverview = () => {
   return (
     <div id='Uses' className='py-32 px-5'>
         <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>

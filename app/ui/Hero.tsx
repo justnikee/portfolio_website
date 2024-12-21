@@ -2,9 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-type Props = {}
-
-const Hero = (props: Props) => {
+const Hero = () => {
 
     const headingOne = useRef<HTMLSpanElement>(null);
     const headingTwo = useRef<HTMLSpanElement>(null);
@@ -29,7 +27,7 @@ const Hero = (props: Props) => {
                 duration: 1,
                 repeat: -1,
                 delay: 5,
-                repeatDelay: 1,
+                repeatDelay: 5,
                 yoyo: true,
                 textStroke: '1px hsl(0, 0%, 100%)',
                 color: 'transparent',

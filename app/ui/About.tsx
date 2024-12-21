@@ -1,12 +1,9 @@
 "use client";
 
-import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-type Props = {}
-
-const About = (props: Props) => {
+const About = () => {
   const leftContainer = useRef<HTMLDivElement>(null);
   const rightContainer = useRef<HTMLDivElement>(null);
   const moreAboutMeRef = useRef<HTMLAnchorElement>(null);
@@ -67,7 +64,7 @@ const About = (props: Props) => {
             </h3>
           </div>
           <div ref={rightContainer} className='flex-1 opacity-0'>
-            <p className='mb-6 font-[outfit] text-lg leading-6 font-light'>I’m a frontend developer from India with 2 years of experience crafting engaging and accessible web experiences. I specialize in using Next.js, React, and Node.js to create solutions that are both functional and visually stunning.
+            <p className='mb-6 font-[outfit] text-lg leading-6 font-light'>I&apos;m a frontend developer from India with 2 years of experience crafting engaging and accessible web experiences. I specialize in using Next.js, React, and Node.js to create solutions that are both functional and visually stunning.
             </p>
             <p className='mb-6 font-[outfit] text-lg leading-6 font-light'>
               As someone who cooks things for the web, I enjoy blending design and engineering to build seamless and impactful projects.

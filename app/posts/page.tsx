@@ -1,8 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
-
-const Posts = (props: Props) => {
+const Posts = () => {
   return (
     <div className='flex justify-center py-32 px-5'>
         <div>
@@ -14,4 +12,4 @@ const Posts = (props: Props) => {
   )
 }
 
-export default Posts
+export default Posts;
