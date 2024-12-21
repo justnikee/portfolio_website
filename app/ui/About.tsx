@@ -54,7 +54,7 @@ const About = () => {
       <div className='px-5 sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
         <div className='flex flex-col gap-8 md:flex-row lg:gap-32'>
           <div ref={leftContainer} className='flex-1 opacity-0'>
-            <h3 className='sm:text-[4rem] text-[2.5rem] leading-[3rem] max-w-[500px] font-[Heading] uppercase lg:leading-[5rem]'>Hi, I'm 
+            <h3 className='sm:text-[4rem] text-[2.5rem] leading-[3rem] max-w-[500px] font-[Heading] uppercase lg:leading-[5rem]'>Hi, I&apos;m 
               <span className='text-linkTextColor' style={{
                 background: '-webkit-linear-gradient(#610000, #FD511D)',
                 WebkitBackgroundClip: 'text',
