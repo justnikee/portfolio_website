@@ -10,14 +10,12 @@ import Footer from "./ui/Footer";
 export default function Home() {
   return (
     <>
-          <Header/>
           <Hero/>
           <About/>
           <TechOverview/>
           <Experiance/>
           <Work/>
           <Contact/>
-          <Footer/>
     </>
   );
 }

@@ -257,3 +257,31 @@ background-size: 200% 100%;
   transform: translateX(-100%); 
   }
  }
+
+
+ /************** marquee *************/
+
+ .marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.gradient-text {
+  margin-right: 2rem;
+}
+

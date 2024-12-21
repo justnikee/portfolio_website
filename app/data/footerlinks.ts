@@ -25,15 +25,15 @@ const links = [
   
   const socialLinks = [
     {
-        link: "#",
+        link: "https://www.x.com/nxkeeyy",
         title: "X"
     },
     {
-        link: "#",
+        link: "https://www.instagram.com/nikxxyyy_",
       title: "Instagram"
     },
     {
-        link: "#",
+        link: "https://github.com/justnikee",
         title: "Github"
     },
     {
@@ -41,7 +41,7 @@ const links = [
         title: "LinkedIn"
     },
     {
-        link: "nikhil98161@gmail.com",
+        link: "nxkeeyyy.dev@gmail.com",
         title: "Email"
     },
   ]

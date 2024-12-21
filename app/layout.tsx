@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import Header from "./ui/Header";
+import Footer from "./ui/Footer";
+
 import { Outfit } from '@next/font/google';
 import SmoothScrolling from "./components/SmoothScroll";
+
 
 const outfit = Outfit({
     subsets: ['latin'],
@@ -37,9 +41,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         <SmoothScrolling>
           {children}
           </SmoothScrolling>
+          <Footer />
         <svg aria-hidden="true" className="svg-grid"><defs><pattern id="hero" width="80" height="80" x="50%" y="-1" patternUnits="userSpaceOnUse"><path d="M.5 200V.5H200" fill="none"></path></pattern></defs><rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect></svg>
       </body>
     </html>

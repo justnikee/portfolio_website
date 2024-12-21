@@ -4,7 +4,7 @@ type Props = {}
 
 const Experiance = (props: Props) => {
   return (
-    <div className='flex justify-center py-32 px-5'>
+    <div id="MoreAboutMe" className='flex justify-center py-32 px-5'>
         <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
             <div className='flex flex-col gap-8 lg:flex-row lg:gap-32'>
                 <div className='flex-1'>
