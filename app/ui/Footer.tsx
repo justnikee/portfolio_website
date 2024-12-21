@@ -48,7 +48,7 @@ const FooterBottom: React.FC = () => {
   useEffect(() => {
     const container = animationRef.current;
     if (container) {
-      const spans = gsap.utils.toArray(container.children);
+      const spans = gsap.utils.toArray(container.children) as HTMLElement[];
 
       // Create horizontal loop
       const tl = horizontalLoop(spans, {

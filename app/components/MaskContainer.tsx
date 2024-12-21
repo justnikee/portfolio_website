@@ -1,7 +1,6 @@
 "use client"
 import React, { useRef, useState } from 'react';
 
-
 type Props = {
     title: string;
     description: string;
@@ -10,7 +9,7 @@ type Props = {
 
 const MaskContainer = ({title, description, email}: Props) => {
     
-    const emailRef = useRef<HTMLHeadElement>(null);
+    const emailRef = useRef<HTMLHeadingElement>(null);
     const [copyText, setCopyText] = useState('Copy')
 
 const handleCopy = () => {

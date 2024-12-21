@@ -5,7 +5,7 @@ type Props = {}
 
 const Contact = (props: Props) => {
   return (
-    <div className='flex justify-center py-32 px-5'>
+    <div id='Contact' className='flex justify-center py-32 px-5'>
         <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto relative'>
         <MaskContainer title="Let's Build Something Great!!" 
         email='nikhil98161@gmail.com' 

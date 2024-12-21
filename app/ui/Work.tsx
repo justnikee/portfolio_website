@@ -5,7 +5,7 @@ type Props = {}
 
 const Work = (props: Props) => {
   return (
-    <div className='work flex justify-center py-32 px-4'>
+    <div id='Work' className='work flex justify-center py-32 px-4'>
     <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
     <div>
         <h2 className='sm:text-[5rem] text-5xl leading-[3.5rem] font-[Heading] uppercase sm:leading-[5rem] text-center mb-16'>Work</h2>

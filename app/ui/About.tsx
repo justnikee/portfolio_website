@@ -1,14 +1,49 @@
+"use client";
+
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { gsap } from 'gsap'
+import { useRef } from 'react'
 
 type Props = {}
 
 const About = (props: Props) => {
+const leftContainer = useRef<HTMLDivElement>(null);
+const rightContainer = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+
+  if(leftContainer.current && rightContainer.current){
+    gsap.fromTo(leftContainer.current, {
+      y: 100,
+      opacity: 0,
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      delay: 1.5,
+      ease: 'power3.out'
+    });
+
+    gsap.fromTo(rightContainer.current, {
+      y: 100,
+      opacity: 0,
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      delay: 1.5,
+      ease: 'power3.out'
+    });
+  }
+
+},[])
+
   return (
-    <div className='flex justify-center sm:py-32 py-4'>
+    <div id='About' className='flex justify-center sm:py-32 py-4'>
         <div className='px-5  sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
             <div className='flex flex-col gap-8 md:flex-row lg:gap-32'>
-                <div className='flex-1'>
+                <div ref={leftContainer} className='flex-1 opacity-0'>
                       <h3 className='sm:text-[4rem] text-[2.5rem] leading-[3rem] max-w-[500px] font-[Heading] uppercase lg:leading-[5rem]'>Hi, I'm 
                         <span className='text-linkTextColor' style={{
                                background: '-webkit-linear-gradient(#610000, #FD511D)',
@@ -18,7 +53,7 @@ const About = (props: Props) => {
                       I’m a digital chef who cooks up creative solutions for the web. 
                       </h3>
                 </div>
-                <div className='flex-1'>
+                <div ref={rightContainer} className='flex-1 opacity-0'>
                     <p className='mb-6 font-[outfit] text-lg leading-6 font-light'>I’m a frontend developer from India with 2 years of experience crafting engaging and accessible web experiences. I specialize in using Next.js, React, and Node.js to create solutions that are both functional and visually stunning.
                     </p>
                      <p className='mb-6 font-[outfit] text-lg leading-6 font-light'>
