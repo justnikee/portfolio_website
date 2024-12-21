@@ -60,7 +60,7 @@ const About = () => {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}> Nikhil</span>,<br/>
-              I’m a digital chef who cooks up creative solutions for the web. 
+              I&apos;m a digital chef who cooks up creative solutions for the web. 
             </h3>
           </div>
           <div ref={rightContainer} className='flex-1 opacity-0'>
