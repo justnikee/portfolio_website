@@ -101,27 +101,32 @@ body::before{
 }
 
 
+@font-face {
+  font-family: 'outfit';
+  src: url('./fonts/Outfit-VariableFont_wght.woff2') format('woff2'),
+}
+
 
 @font-face {
   font-family: 'MainFont';
-  src: url('../public/fonts/Neue Helvetica W04 89 Cm Heavy.woff2') format('woff2'),
+  src: url('./fonts/Neue Helvetica W04 89 Cm Heavy.woff2') format('woff2'),
 }
 
 
 @font-face {
   font-family: 'Heading';
-  src: url('../public/fonts/a95188992b6e1d54-s.p (1).woff') format('woff'),
+  src: url('./fonts/a95188992b6e1d54-s.p (1).woff') format('woff'),
 }
 
 @font-face {
   font-family: 'Heading2';
-  src: url('../public/fonts/ab9520440e5ce592-s.p (1).woff') format('woff'),
+  src: url('./fonts/ab9520440e5ce592-s.p (1).woff') format('woff'),
 }
 
 
 @font-face {
   font-family: 'HeadingThin';
-  src: url('../public/fonts/46a96903ce28a9c5-s.p (1).ttf') format('ttf'),
+  src: url('./fonts/46a96903ce28a9c5-s.p (1).ttf') format('ttf'),
 }
 
 
