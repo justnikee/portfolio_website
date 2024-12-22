@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
@@ -40,6 +41,7 @@ export default function RootLayout({
           </defs>
           <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect>
         </svg>
+        <Analytics/>
       </body>
     </html>
   );

@@ -13,6 +13,7 @@
     "@next/font": "^14.2.15",
     "@studio-freight/hamo": "^0.6.33",
     "@studio-freight/react-lenis": "^0.0.47",
+    "@vercel/analytics": "^1.4.1",
     "gsap": "^3.12.5",
     "lenis": "^1.1.17",
     "next": "^15.1.2",
