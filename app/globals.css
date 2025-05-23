@@ -16,11 +16,18 @@
   }
 }
 
+html{
+  overflow-x: hidden;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
+  --gradient-width: 0%;
+  --gradient-height: 0px;
+  overflow-x: hidden;
 }
 
 body::before{
@@ -37,35 +44,21 @@ body::before{
   position: relative;
 }
 
-/* .work::before{
-  content: "";
-  inset: 0;
-  z-index: -10;
-  opacity: 0.2;
-  mix-blend-mode: multiply;
-  position: absolute;
-  background: url('../public/main_images/bg-noise.7485933b.png') 20px 20px repeat;
-} */
 
 @supports(background: paint(something)) {
   body {
-      --gradient-width: 10%; /* Start with a small initial value */
-      --gradient-height: 100px; /* Prevent abrupt blinking */
-      
-      background-image: 
-          radial-gradient(var(--gradient-width) var(--gradient-height) at 50% -1000px, rgba(0, 10, 30, 0.9), hsla(220, 30%, 10%, 0)),
-          radial-gradient(var(--gradient-width) var(--gradient-height) at 50% calc(100% + 1000px), rgba(0, 10, 30, 0.9), hsla(220, 30%, 10%, 0));
-      
-      animation: bgGradient 2s ease-out forwards; /* Use easing for smooth animation */
+    background-image:radial-gradient(var(--gradient-width) var(--gradient-height) at 50% -1000px,rgba(0,20,61,.9),hsla(0,0%,100%,0)),radial-gradient(var(--gradient-width) var(--gradient-height) at 50% calc(100% + 1000px),rgba(0,20,61,.9),hsla(0,0%,100%,0));
+    animation:bgGradient 1.5s linear forwards;
   }
 
   @keyframes bgGradient {
-      to {
-          --gradient-width: 100%; /* Fully expand */
-          --gradient-height: 2800px; /* Full height */
-      }
+    to {
+      --gradient-width: 100%;
+      --gradient-height: 2800px;
+    }
   }
 }
+
 
 
 .svg-grid{
@@ -290,3 +283,31 @@ background-size: 200% 100%;
   margin-right: 2rem;
 }
 
+.animation_object{
+    height: 100%;
+    width: 100%;
+    transform: translateX(-45%);
+}
+
+.animation_object::after{
+    content: "";
+    position: absolute;
+    width: 80%;
+    top: 0;
+    height: 50vh;
+    left: 30px;
+    max-width: 1800px;
+    background: radial-gradient(50% 50% at 50% 50%, #fff 0, hsla(0, 0%, 100%, 0) 100%);
+    opacity: 0;
+    animation: hero_spotlight 1s ease 1.5s forwards;
+    transform: translateZ(0) rotate(40deg) skewX(0) skewY(0) scaleX(1) scaleY(1);
+    -webkit-animation: hero_spotlight 1s ease 1.5s forwards;
+}
+
+@keyframes hero_spotlight {
+  100% {
+    top: 50px;
+    opacity: .06;
+    transform: translateZ(0) rotate(45deg) skewX(0) skewY(0) scaleX(1) scaleY(1);
+}
+}

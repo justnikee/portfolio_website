@@ -48,6 +48,9 @@ const Hero = () => {
                         <span ref={headingThree} className='block opacity-0'>For Web</span>
                     </h1>
                 </div>
+                <div className='animation_object absolute top-0 left-1/2'>
+
+                </div>
             </div>
         </div>
     )
