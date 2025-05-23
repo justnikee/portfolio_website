@@ -1,13 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 
 const links = ["About", "Uses", "Work", "Post", "Gallery"];
 
 const Header = () => {
+
+const [scrollDown, setScrollDown] = useState(false);
+const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    function checkScrollDown() {
+      const scrollY = window.scrollY;
+
+      if(scrollY > lastScrollY.current){
+          setScrollDown(true);
+      }else{
+          setScrollDown(false);
+      }
+      lastScrollY.current = scrollY;
+      
+    }
+
+    window.addEventListener("scroll", checkScrollDown);
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollDown);
+    };
+  }, []);
+
+
     const header = useRef<HTMLHeadingElement>(null);
     const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
     const contactRef = useRef<HTMLElement | null>(null);
@@ -96,7 +121,9 @@ const Header = () => {
     };
 
     return (
-        <header ref={header} className="w-full pt-5 sticky top-0 z-10 opacity-0">
+        <header ref={header} className={`w-full pt-5 fixed z-10 opacity-0 transition-all`}
+        style={{ top: scrollDown ? "-72px" : "0px", opacity: 1 }}
+        >
             <div
                 className="hidden max-w-[800px] h-[52px] m-auto sm:flex items-center justify-between w-full bg-[hsla(0,0%,5%,.6)] rounded-[100px] py-2 px-6 border border-[#212121]"
                 style={{

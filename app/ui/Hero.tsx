@@ -36,7 +36,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <div className='flex justify-center py-32'>
+        <div className='flex justify-center py-32 mt-[72px]'>
             <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
                 <div className='flex justify-center'>
                     <h1 className='font-[MainFont] text-[100px] leading-[60px] uppercase font-bold text-center md:leading-[100px]' style={{
