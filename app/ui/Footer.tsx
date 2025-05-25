@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const Footer: React.FC = () => {
   return (
-    <div className='flex justify-center pt-4 px-5 sm:px-0 sm:pt-32'>
+    <div className='relative flex justify-center pt-4 px-5 sm:px-0 sm:pt-32'>
       <div className='overflow-hidden'>
         <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto relative w-full'>
           <div className='flex flex-col gap-8 justify-between w-full sm:flex-row sm:gap-0'>
@@ -33,6 +33,7 @@ const Footer: React.FC = () => {
         <FooterBottom />
         <EndFooter/>
       </div>
+         <svg aria-hidden="true" className="svg-grid-bottom"><defs><pattern id="hero" width="80" height="80" x="50%" y="-1" patternUnits="userSpaceOnUse"><path d="M.5 200V.5H200" fill="none"></path></pattern></defs><rect width="100%" height="100%" stroke-width="0" fill="url(#hero)"></rect></svg>
     </div>
   );
 };

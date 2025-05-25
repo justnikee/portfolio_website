@@ -326,3 +326,17 @@ background-size: 200% 100%;
 #card:hover::before {
   opacity: 1;
 }
+
+.svg-grid-bottom{
+    mask-image: radial-gradient(50% 1000px at bottom center, #fffaf5, transparent);
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 235px;
+    position: absolute;
+    z-index: -10;
+    stroke: rgba(255, 250, 245, .06);
+    width: 100%;
+    animation: svgMask 1.5s linear forwards;
+    -webkit-animation: svgMask 1.5s linear forwards;
+}
