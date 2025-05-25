@@ -1,12 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
+import AnimatedHeading from '../components/Animated-heading'
+
 
 const TechOverview = () => {
   return (
     <div id='Uses' className='py-32 px-5'>
         <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
             <div>
-                <h2 className='text-5xl leading-[3.5rem] sm:text-[5rem] font-[Heading] uppercase sm:leading-[5rem] text-center'>I Code Memorable Experiences.</h2>
+                <AnimatedHeading heading="I Code Memorable Experiences."/>
+                {/* <h2 ref="animate-heading" className='text-5xl leading-[3.5rem] sm:text-[5rem] font-[Heading] uppercase sm:leading-[5rem] text-center'></h2> */}
             </div>
             <div>
                 <div className='flex justify-center mt-7'>
