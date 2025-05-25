@@ -1,12 +1,14 @@
 import React from 'react'
 import Card from '../components/Card'
+import AnimatedHeading from '../components/Animated-heading'
 
 const Work = () => {
   return (
     <div id='Work' className='work flex justify-center py-32 px-4'>
     <div className='sm:px-[32px] w-full sm:py-0 max-w-[1300px] m-auto'>
     <div>
-        <h2 className='sm:text-[5rem] text-5xl leading-[3.5rem] font-[Heading] uppercase sm:leading-[5rem] text-center mb-16'>Work</h2>
+      <AnimatedHeading heading='Work' additionalCss='mb-16'/>
+        {/* <h2 className='sm:text-[5rem] text-5xl leading-[3.5rem] font-[Heading] uppercase sm:leading-[5rem] text-center mb-16'>Work</h2> */}
     </div>
     <div className='flex flex-col sm:flex-row justify-between gap-6 twoIn'>
       <Card link="https://github.com/justnikee/next.stateofkind" title='State Of Kind' description='State of Kind is a modern e-commerce store built with Next.js, offering fast performance. Designed with Tailwind CSS, it provides a sleek, responsive layout. GSAP animations enhance user interaction, while powerful features like product filtering, advanced search, and efficient product management make browsing and purchasing seamless. Enjoy an intuitive, engaging shopping experience with State of Kind. 🚀' image={'/main_images/stateofkind.png'} stack={["NextJs", "Tailwind", "Prisma", "MongoDB", "GSAP"]} />

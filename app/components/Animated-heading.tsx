@@ -8,11 +8,14 @@ import { ScrollTrigger } from "gsap/all"
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
-export default function AnimatedHeading({heading}: {heading: string}){
+export default function AnimatedHeading({heading , additionalCss}: {heading: string, additionalCss?: string}){
     
     const animate_heading = useRef<HTMLHeadingElement>(null);
     
     useGSAP(() => {
+
+         if (!animate_heading.current) return;
+
          const split = new SplitText(animate_heading.current , {type: "chars,words"});
          
          gsap.fromTo(split.chars, {
@@ -33,11 +36,15 @@ export default function AnimatedHeading({heading}: {heading: string}){
         ease: "power2.out",
          })
 
+    return () => {
+      split.revert();
+    };
+
     }, [])
 
     return(
         <>
-          <h2 ref={animate_heading} className="text-5xl leading-[3.5rem] sm:text-[5rem] font-[Heading] uppercase sm:leading-[5rem] text-center">{heading}</h2>
+          <h2 ref={animate_heading} className={`text-5xl leading-[3.5rem] sm:text-[5rem] font-[Heading] uppercase sm:leading-[5rem] text-center ${additionalCss}`}>{heading}</h2>
         </>
     )
 }
