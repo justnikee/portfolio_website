@@ -26,7 +26,7 @@ export default function AnimatedHeading({heading}: {heading: string}){
                 start: "top 80%",
                 end: "bottom 60%",
                 toggleActions: "play none none reverse",
-                markers: true,
+                // markers: true,
              },
         duration: 0.4,
         stagger: 0.02,
