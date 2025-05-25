@@ -311,3 +311,18 @@ background-size: 200% 100%;
     transform: translateZ(0) rotate(45deg) skewX(0) skewY(0) scaleX(1) scaleY(1);
 }
 }
+
+#card:before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(56.7% 75% at 50% 3.7%, #4a4a4a 0, #232220);
+  opacity: 0;
+  top: 0;
+  z-index: -1;
+      transition: all .5s ease-in-out;
+}
+
+#card:hover::before {
+  opacity: 1;
+}
