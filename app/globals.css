@@ -162,9 +162,9 @@ div#card:hover {
   transform: translateY(-6px);
 }
 
-div#card{
+/* div#card{
   transition: 0.5s ease-in-out;
-}
+} */
 
 
 .copy_button{
