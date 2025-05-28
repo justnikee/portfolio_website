@@ -17,32 +17,32 @@ const Contact = () => {
 
 useGSAP(() => {
   const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#Contact",
-      start: "top 85%",
-      end: "bottom 40%",
-      toggleActions: "play none none reverse",
-    }
-  });
+            scrollTrigger: {
+            trigger: "#Contact",
+            start: "top 85%",
+            end: "bottom 40%",
+            toggleActions: "play none none reverse",
+            }
+        });
 
-  tl.from(headingRef.current, {
-    opacity: 0,
-    y: 80,
-    duration: 0.8,
-    ease: "power3.out",
-  })
-  .from(subHeadingRef.current, {
-    opacity: 0,
-    y: 60,
-    duration: 0.8,
-    ease: "power3.out",
-  }, "-=0.4")
-  .from(emailButtonRef.current, {
-    opacity: 0,
-    y: 40,
-    duration: 0.6,
-    ease: "power3.out",
-  }, "-=0.4")
+        tl.from(headingRef.current, {
+            opacity: 0,
+            y: 80,
+            duration: 0.8,
+            ease: "power3.out",
+        })
+        .from(subHeadingRef.current, {
+            opacity: 0,
+            y: 60,
+            duration: 0.8,
+            ease: "power3.out",
+        }, "-=0.4")
+        .from(emailButtonRef.current, {
+            opacity: 0,
+            y: 40,
+            duration: 0.6,
+            ease: "power3.out",
+        }, "-=0.4")
 }, []);
 
   

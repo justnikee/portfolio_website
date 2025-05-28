@@ -1,8 +1,37 @@
+"use client"
+
 import Image from "next/image"
+import { useRef } from 'react';
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Experiance = () => {
+
+const aboutMeRef = useRef<HTMLDivElement>(null)
+
+useGSAP(() => {
+  gsap.fromTo(aboutMeRef.current, {
+          opacity: 0,
+          y: 150
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: aboutMeRef.current,
+                start: "top 80%",
+                end: "bottom 30%",
+                toggleActions: 'play none none reverse'
+            },
+             ease: "power2.inOut",
+        });
+}, [])
+
   return (
-    <div id="MoreAboutMe" className='flex justify-center py-32 px-5'>
+    <div ref={aboutMeRef} id="MoreAboutMe" className='flex justify-center py-32 px-5'>
         <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto'>
             <div className='flex flex-col gap-8 lg:flex-row lg:gap-32'>
                 <div className='flex-1'>
