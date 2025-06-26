@@ -46,17 +46,13 @@ const lastScrollY = useRef(0);
 
     useEffect(() => {
         if (header.current) {
-            gsap.fromTo(
+            gsap.to(
                 header.current,
-                {
-                    y: -100,
-                    opacity: 0,
-                },
                 {
                     y: 0,
                     opacity: 1,
                     duration: 1,
-                    delay: 2,
+                    delay: 1,
                     ease: "power3.out",
                 }
             );
@@ -121,8 +117,13 @@ const lastScrollY = useRef(0);
     };
 
     return (
-        <header ref={header} className={`w-full pt-5 fixed z-10 opacity-0 transition-all`}
-        style={{ top: scrollDown ? "-72px" : "0px", opacity: 1 }}
+        <header ref={header}
+                className={`w-full pt-5 fixed z-10 transition-all duration-500 ease-in-out`}
+                style={{
+                top: scrollDown ? "-72px" : "0px",
+                opacity: 0,                  
+                transform: "translateY(-100px)",
+            }}
         >
             <div
                 className="hidden max-w-[800px] h-[52px] m-auto sm:flex items-center justify-between w-full bg-[hsla(0,0%,5%,.6)] rounded-[100px] py-2 px-6 border border-[#212121]"
