@@ -58,7 +58,7 @@ const EndFooter = () => {
       <div className='sm:px-[32px] sm:py-0 max-w-[1300px] m-auto relative w-full block before-image-color'>
         <div className='py-4 pt-8 flex justify-between'>
           <div className='flex-1'>
-            <h3 className='font-[outfit]'>© 2024 Nikhil.</h3>
+            <h3 className='font-[outfit]'>© 2025 Nikhil</h3>
           </div>
           <div className='flex-1 flex justify-center'>
           <Link className='h-14' href={'/'}>
@@ -66,7 +66,7 @@ const EndFooter = () => {
           </Link>
           </div>
           <div className='flex-1  justify-end flex'>
-            <h3 className='font-[outfit]'>🥔Chandigarh, IN</h3>
+            <h3 className='font-[outfit]'>Chandigarh 🇮🇳</h3>
           </div>
         </div>
       </div>
