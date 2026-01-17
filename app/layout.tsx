@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
-
+import ClientLayout from "./ClientLayout";
 import SmoothScrolling from "./components/SmoothScroll";
 
 
@@ -24,26 +24,28 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        <Header />
-        <SmoothScrolling>{children}</SmoothScrolling>
-        <Footer />
-        <svg aria-hidden="true" className="svg-grid">
-          <defs>
-            <pattern
-              id="hero"
-              width="80"
-              height="80"
-              x="50%"
-              y="-1"
-              patternUnits="userSpaceOnUse"
-            >
-              <path d="M.5 200V.5H200" fill="none"></path>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect>
-        </svg>
-        <Analytics/>
-        <SpeedInsights/>
+        <ClientLayout>
+          <Header />
+          <SmoothScrolling>{children}</SmoothScrolling>
+          <Footer />
+          <svg aria-hidden="true" className="svg-grid">
+            <defs>
+              <pattern
+                id="hero"
+                width="80"
+                height="80"
+                x="50%"
+                y="-1"
+                patternUnits="userSpaceOnUse"
+              >
+                <path d="M.5 200V.5H200" fill="none"></path>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect>
+          </svg>
+        </ClientLayout>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

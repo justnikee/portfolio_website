@@ -1,39 +1,68 @@
 "use client";
+
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { useLoading } from '../context/LoadingContext';
 
 const Hero = () => {
+    const { isLoading } = useLoading();
 
     const headingOne = useRef<HTMLSpanElement>(null);
     const headingTwo = useRef<HTMLSpanElement>(null);
     const headingThree = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
-        if (headingOne.current && headingTwo.current && headingThree.current) {
-            gsap.fromTo(headingOne.current, 
-                { y: 100, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: 'power3.out' }
-            );
-            gsap.fromTo(headingTwo.current, 
-                { y: 100, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1, delay: 1, ease: 'power3.out' }
-            );
-            gsap.fromTo(headingThree.current, 
-                { y: 100, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1, delay: 1.5, ease: 'power3.out' }
-            );
+        // Only start animations after preloader is complete
+        if (isLoading) return;
 
-            gsap.to(headingThree.current, {
-                duration: 1,
+        if (headingOne.current && headingTwo.current && headingThree.current) {
+            // Initial Fade In Stagger
+            const tlInit = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
+
+            tlInit.fromTo(headingOne.current,
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, delay: 0.2 }
+            )
+                .fromTo(headingTwo.current,
+                    { y: 100, opacity: 0 },
+                    { y: 0, opacity: 1 },
+                    "-=0.7"
+                )
+                .fromTo(headingThree.current,
+                    { y: 100, opacity: 0 },
+                    { y: 0, opacity: 1 },
+                    "-=0.7"
+                );
+
+            // Gentle "Wobble" for Heading Two ("Things") - Subtle keep-alive
+            gsap.to(headingTwo.current, {
+                rotation: 2,
+                duration: 2.5,
                 repeat: -1,
-                delay: 5,
-                repeatDelay: 5,
                 yoyo: true,
-                textStroke: '1px hsl(0, 0%, 100%)',
-                color: 'transparent',
+                ease: "sine.inOut",
+                delay: 2.2
             });
+
+            // Smooth Loop Animation for Heading Three ("For Web")
+            // Transitions cleanly between solid white and outline
+            const tlLoop = gsap.timeline({ repeat: -1, repeatDelay: 1, delay: 2 });
+
+            tlLoop.to(headingThree.current, {
+                color: 'transparent',
+                webkitTextStroke: '1px white',
+                duration: 1.2,
+                ease: "power2.inOut"
+            })
+                .to(headingThree.current, {
+                    color: 'white',
+                    webkitTextStroke: '0px transparent', // animate back to 0 width to fade it out cleanly
+                    duration: 1.2,
+                    ease: "power2.inOut",
+                    delay: 1 // hold the outline state for a moment
+                });
         }
-    }, []);
+    }, [isLoading]);
 
     return (
         <div className='flex justify-center py-32 mt-[72px]'>

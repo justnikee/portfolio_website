@@ -56,10 +56,7 @@ const TechIconSection = () => {
           </div>
           <div>
             <p className="font-[outfit] text-xl mt-16 max-w-[900px] text-center m-auto">
-              With over 3+ years of experience building for the web. JavaScript
-              (or TypeScript) and React remains my preferred tools for web
-              applications. The adaptability and extensive ecosystem empower me
-              to deliver rapid and scalable solutions with ease.
+              With over 3+ years of experience building for the web, JavaScript (and TypeScript) with React remain my core tools. Their flexibility and ecosystem allow me to build scalable, high-performance applications efficiently.
             </p>
           </div>
         </div>

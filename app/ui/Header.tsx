@@ -9,28 +9,28 @@ const links = ["About", "Uses", "Work", "Post", "Gallery"];
 
 const Header = () => {
 
-const [scrollDown, setScrollDown] = useState(false);
-const lastScrollY = useRef(0);
+    const [scrollDown, setScrollDown] = useState(false);
+    const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    function checkScrollDown() {
-      const scrollY = window.scrollY;
+    useEffect(() => {
+        function checkScrollDown() {
+            const scrollY = window.scrollY;
 
-      if(scrollY > lastScrollY.current){
-          setScrollDown(true);
-      }else{
-          setScrollDown(false);
-      }
-      lastScrollY.current = scrollY;
-      
-    }
+            if (scrollY > lastScrollY.current) {
+                setScrollDown(true);
+            } else {
+                setScrollDown(false);
+            }
+            lastScrollY.current = scrollY;
 
-    window.addEventListener("scroll", checkScrollDown);
+        }
 
-    return () => {
-      window.removeEventListener("scroll", checkScrollDown);
-    };
-  }, []);
+        window.addEventListener("scroll", checkScrollDown);
+
+        return () => {
+            window.removeEventListener("scroll", checkScrollDown);
+        };
+    }, []);
 
 
     const header = useRef<HTMLHeadingElement>(null);
@@ -118,10 +118,10 @@ const lastScrollY = useRef(0);
 
     return (
         <header ref={header}
-                className={`w-full pt-5 fixed z-10 transition-all duration-500 ease-in-out`}
-                style={{
+            className={`w-full pt-5 fixed z-10 transition-all duration-500 ease-in-out`}
+            style={{
                 top: scrollDown ? "-72px" : "0px",
-                opacity: 0,                  
+                opacity: 0,
                 transform: "translateY(-100px)",
             }}
         >
@@ -133,21 +133,19 @@ const lastScrollY = useRef(0);
                 }}
             >
                 <div>
-                    <Link href={"/"} legacyBehavior>
-                        <a>
-                            <Image width={90} height={40} alt="Nikhil Logo" src="/main_images/NIKHIL.png" />
-                        </a>
+                    <Link href={"/"}>
+                        <Image width={90} height={40} alt="Nikhil Logo" src="/main_images/NIKHIL.png" />
                     </Link>
                 </div>
                 <div className="flex gap-4">
                     {links.map((link, index) => (
-                        <Link key={index} href={link === "Post" ? "/posts" : `/#${link}`} legacyBehavior>
-                            <a
-                                className="font-[outfit] scroll-link"
-                                onClick={(e) => link !== "Post" && handleLinkClick(e, link)}
-                            >
-                                <span>{link}</span>
-                            </a>
+                        <Link
+                            key={index}
+                            href={link === "Post" ? "/posts" : `/#${link}`}
+                            className="font-[outfit] scroll-link"
+                            onClick={(e) => link !== "Post" && handleLinkClick(e, link)}
+                        >
+                            <span>{link}</span>
                         </Link>
                     ))}
                 </div>
@@ -163,10 +161,8 @@ const lastScrollY = useRef(0);
             </div>
             <div className="sm:hidden relative">
                 <div className="flex justify-between items-center px-4 z-30 relative">
-                    <Link href={"/"} legacyBehavior>
-                        <a>
-                            <Image width={90} height={40} alt="Nikhil Logo" src="/main_images/NIKHIL.png" />
-                        </a>
+                    <Link href={"/"}>
+                        <Image width={90} height={40} alt="Nikhil Logo" src="/main_images/NIKHIL.png" />
                     </Link>
                     <div className="">
                         <button onClick={handleClick} className="bg-[hsla(0,0%,5%,.6)] border border-[#212121] p-2 rounded-full flex flex-col gap-1.5 px-3 py-3 backdrop-blur-3xl">
@@ -181,24 +177,23 @@ const lastScrollY = useRef(0);
                     <div className="px-5 py-5 h-full">
                         <div className="flex flex-col gap-4 items-start justify-end h-full">
                             {links.map((link, index) => (
-                                <Link key={index} href={link === "Post" ? "/posts" : `/#${link}`} legacyBehavior>
-                                    <a
-                                        ref={(el) => { navLinks.current[index] = el; }}
-                                        onClick={(e) => link !== "Post" && handleLinkClick(e, link)}
-                                        className="font-[Heading] text-5xl text-white"
-                                    >
-                                        <span>{link}</span>
-                                    </a>
-                                </Link>
-                            ))}
-                            <Link href="#Contact" legacyBehavior>
-                                <a
-                                    ref={(el) => { navLinks.current[links.length] = el; }}
-                                    onClick={handleContactClick}
+                                <Link
+                                    key={index}
+                                    href={link === "Post" ? "/posts" : `/#${link}`}
+                                    ref={(el) => { navLinks.current[index] = el; }}
+                                    onClick={(e) => link !== "Post" && handleLinkClick(e, link)}
                                     className="font-[Heading] text-5xl text-white"
                                 >
-                                    Contact
-                                </a>
+                                    <span>{link}</span>
+                                </Link>
+                            ))}
+                            <Link
+                                href="#Contact"
+                                ref={(el) => { navLinks.current[links.length] = el; }}
+                                onClick={handleContactClick}
+                                className="font-[Heading] text-5xl text-white"
+                            >
+                                Contact
                             </Link>
                         </div>
                     </div>

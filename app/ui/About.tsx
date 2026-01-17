@@ -78,20 +78,15 @@ const About = () => {
                 Nikhil
               </span>
               ,<br />
-              I&apos;m a digital chef who cooks up creative solutions for the
-              web.
+              A digital chef crafting creative solutions for the web.
             </h3>
           </div>
           <div ref={rightContainer} className="flex-1 opacity-0">
             <p className="mb-6 font-[outfit] text-lg leading-6 font-light">
-              I&apos;m a frontend developer from India with 3+ years of
-              experience crafting engaging and accessible web experiences. I
-              specialize in using Next.js, React, and Node.js to create
-              solutions that are both functional and visually stunning.
+              I&apos;m a frontend developer from India with 3+ years of experience building fast, accessible, and visually engaging web experiences.
             </p>
             <p className="mb-6 font-[outfit] text-lg leading-6 font-light">
-              As someone who cooks things for the web, I enjoy blending design
-              and engineering to build seamless and impactful projects.
+              I specialize in React, Next.js, and modern JavaScript, blending clean design with solid engineering to deliver seamless, impactful products
             </p>
             <div>
               <a
