@@ -6,6 +6,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import { usePathname } from "next/navigation";
 
+import BlogHeader from "../components/BlogHeader";
+
 const links = ["About", "Uses", "Work", "Post", "Gallery"];
 
 const Header = () => {
@@ -14,6 +16,11 @@ const Header = () => {
     // Skip header on admin routes
     if (pathname?.startsWith('/admin')) {
         return null;
+    }
+
+    // Use specific header for blog pages
+    if (pathname?.startsWith('/posts')) {
+        return <BlogHeader />;
     }
 
     const [scrollDown, setScrollDown] = useState(false);

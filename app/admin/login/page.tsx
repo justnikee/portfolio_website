@@ -28,10 +28,21 @@ export default function LoginPage() {
             })
             if (error) throw error
 
+            console.log('Login Debug:', {
+                inputEmail: email,
+                userEmail: data.user?.email,
+                adminEmail: ADMIN_EMAIL,
+                envVar: process.env.NEXT_PUBLIC_ADMIN_EMAIL
+            })
+
+            // Get admin email and trim whitespace
+            const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').trim().toLowerCase()
+            const userEmail = (data.user?.email || '').trim().toLowerCase()
+
             // Check if user email matches admin email
-            if (ADMIN_EMAIL && data.user?.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+            if (adminEmail && userEmail !== adminEmail) {
                 await supabase.auth.signOut()
-                throw new Error('Access denied. You are not authorized to access the admin panel.')
+                throw new Error(`Access denied. You logged in as "${userEmail}" but the admin email is set to "${adminEmail}". Please check your .env.local file.`)
             }
 
             router.push('/admin')

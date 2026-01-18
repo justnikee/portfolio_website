@@ -9,7 +9,7 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
     return (
-        <Link href={`/posts/${post.slug}`} className="group block">
+        <Link href={`/posts/${post.slug}`} className="group block relative">
             <article className="bg-[#151515] border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#3a3a3a] transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl hover:shadow-black/20">
                 {/* Featured Image */}
                 {post.featured_image ? (
@@ -41,7 +41,7 @@ export default function PostCard({ post }: PostCardProps) {
 
                 {/* Content */}
                 <div className="p-5">
-                    <h2 className="text-xl font-[Heading] text-white uppercase group-hover:text-[#ccc] transition-colors mb-2 line-clamp-2">
+                    <h2 className="text-xl font-sans font-bold tracking-tight text-white group-hover:text-[#ccc] transition-colors mb-2 line-clamp-2">
                         {post.title}
                     </h2>
 

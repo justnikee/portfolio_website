@@ -1,11 +1,13 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { createServerSupabaseClient } from '@/app/lib/supabase-server'
 import type { Post, Comment } from '@/app/lib/types'
 import { format } from 'date-fns'
 import CommentsSection from './CommentsSection'
 import ShareButtons from '@/app/components/posts/ShareButtons'
+import JsonLd from '@/app/components/JsonLd'
 
 export const dynamic = 'force-dynamic'
 
@@ -19,6 +21,36 @@ async function getPost(slug: string) {
         .single()
 
     return data as Post | null
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params
+    const post = await getPost(slug)
+
+    if (!post) {
+        return {
+            title: 'Post Not Found',
+        }
+    }
+
+    return {
+        title: post.title,
+        description: post.excerpt,
+        openGraph: {
+            title: post.title,
+            description: post.excerpt || undefined,
+            type: 'article',
+            publishedTime: post.published_at || post.created_at,
+            authors: ['Nikhil'],
+            images: post.featured_image ? [post.featured_image] : [],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.title,
+            description: post.excerpt || undefined,
+            images: post.featured_image ? [post.featured_image] : [],
+        }
+    }
 }
 
 async function getComments(postId: string) {
@@ -48,24 +80,7 @@ async function getRelatedPosts(category: string | null, currentId: string) {
     return data as Post[] || []
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params
-    const post = await getPost(slug)
 
-    if (!post) {
-        return { title: 'Post Not Found' }
-    }
-
-    return {
-        title: `${post.title} | Nikhil`,
-        description: post.excerpt || `Read ${post.title} on my blog`,
-        openGraph: {
-            title: post.title,
-            description: post.excerpt || '',
-            images: post.featured_image ? [post.featured_image] : [],
-        },
-    }
-}
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
@@ -80,8 +95,23 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         getRelatedPosts(post.category, post.id)
     ])
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        image: post.featured_image ? [post.featured_image] : [],
+        datePublished: post.published_at || post.created_at,
+        dateModified: post.updated_at,
+        author: {
+            '@type': 'Person',
+            name: 'Nikhil',
+        },
+    }
+
     return (
         <article className="py-32 px-4 relative min-h-screen">
+            <JsonLd data={jsonLd} />
             <div className="max-w-[800px] mx-auto">
                 {/* Back Link */}
                 <Link
@@ -144,7 +174,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 {/* Content */}
                 <div
                     className="prose prose-invert prose-lg max-w-none mb-12
-            prose-headings:font-[Heading] prose-headings:uppercase prose-headings:tracking-wide
+            prose-headings:font-sans prose-headings:tracking-tight prose-headings:font-bold
             prose-h1:text-4xl prose-h1:mt-14 prose-h1:mb-6
             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5
             prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
