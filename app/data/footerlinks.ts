@@ -2,23 +2,23 @@
 const links = [
   {
     title: "About",
-    link: "#"
+    link: "#about"
   },
   {
     title: "Work",
-    link: "#"
+    link: "#work"
   },
   {
     title: "Gallery",
-    link: "#"
+    link: "#gallery"
   },
   {
     title: "Uses",
-    link: "#"
+    link: "#uses"
   },
   {
     title: "Posts",
-    link: "#"
+    link: "/posts"
   }
 ];
 

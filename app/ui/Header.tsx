@@ -4,10 +4,17 @@ import Link from "next/link";
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { usePathname } from "next/navigation";
 
 const links = ["About", "Uses", "Work", "Post", "Gallery"];
 
 const Header = () => {
+    const pathname = usePathname();
+
+    // Skip header on admin routes
+    if (pathname?.startsWith('/admin')) {
+        return null;
+    }
 
     const [scrollDown, setScrollDown] = useState(false);
     const lastScrollY = useRef(0);

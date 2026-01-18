@@ -4,8 +4,16 @@ import React from 'react';
 import { links, socialLinks } from '../data/footerlinks';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const Footer: React.FC = () => {
+  const pathname = usePathname();
+
+  // Skip footer on admin routes
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <footer className='relative'>
       {/* Main Footer Content */}

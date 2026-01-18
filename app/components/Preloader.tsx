@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useLoading } from '../context/LoadingContext';
+import { usePathname } from 'next/navigation';
 
 const Preloader = () => {
     const preloaderRef = useRef<HTMLDivElement>(null);
@@ -10,8 +11,18 @@ const Preloader = () => {
     const counterRef = useRef<HTMLSpanElement>(null);
     const [counter, setCounter] = useState(0);
     const { setLoaded } = useLoading();
+    const pathname = usePathname();
+
+    // Only show preloader on homepage
+    const isHomepage = pathname === '/';
 
     useEffect(() => {
+        // Immediately set loaded for non-homepage routes
+        if (!isHomepage) {
+            setLoaded();
+            return;
+        }
+
         const tl = gsap.timeline();
 
         // Initial setup
@@ -79,9 +90,14 @@ const Preloader = () => {
         return () => {
             tl.kill();
         };
-    }, [setLoaded]);
+    }, [setLoaded, isHomepage]);
 
     const name = 'Nikhil';
+
+    // Only render preloader on homepage
+    if (!isHomepage) {
+        return null;
+    }
 
     return (
         <div
@@ -119,3 +135,4 @@ const Preloader = () => {
 };
 
 export default Preloader;
+
