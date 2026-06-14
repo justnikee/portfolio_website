@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Magnetic from "../components/Magnetic";
+import { ElementTile } from "../components/ElementTile";
 
 const Contact = () => {
   const emailRef = useRef<HTMLSpanElement>(null);
@@ -19,31 +20,19 @@ const Contact = () => {
   };
 
   return (
-    <section id="Contact" className="px-5 py-28 sm:px-8 sm:py-40">
+    <section id="Contact" className="px-5 py-24 sm:px-8 sm:py-32">
       <div className="m-auto max-w-[1400px]">
-        <div
-          className="mb-12 flex items-center gap-4"
-          data-parallax
-          data-speed="25"
-        >
-          <span className="eyebrow">(05) — Contact</span>
-          <span className="rule flex-1" />
+        <div className="mb-12 flex items-center gap-4">
+          <ElementTile symbol="Cu" number={29} name="Copper" className="text-[0.6rem]" />
+          <span className="eyebrow">Contact</span>
         </div>
 
-        <p
-          data-parallax
-          data-speed="-28"
-          className="mb-8 max-w-2xl font-[outfit] text-lg leading-relaxed text-[--ink-soft] sm:text-xl"
-        >
+        <p className="mb-8 max-w-2xl font-[outfit] body-text">
           Got something worth cooking? I&apos;m open to new work, collaborations
           and the occasional chat about cats or the meaning of life.
         </p>
 
-        <h2
-          data-parallax
-          data-speed="45"
-          className="font-[MainFont] uppercase leading-[0.9] tracking-[-0.02em]"
-        >
+        <h2 className="font-[MainFont] uppercase leading-[0.9] tracking-[-0.02em]">
           <span className="block" style={{ fontSize: "clamp(2.6rem, 11vw, 9rem)" }}>
             Let&apos;s make
           </span>

@@ -65,7 +65,14 @@ const WorkList = () => {
       const xTo = gsap.quickTo(hover, "x", { duration: 0.55, ease: "power3" });
       const yTo = gsap.quickTo(hover, "y", { duration: 0.55, ease: "power3" });
 
+      // snap to the cursor instantly on the first move so the preview
+      // doesn't glide in from the top-left corner (its 0,0 default)
+      let positioned = false;
       const onMove = (e: MouseEvent) => {
+        if (!positioned) {
+          gsap.set(hover, { x: e.clientX, y: e.clientY });
+          positioned = true;
+        }
         xTo(e.clientX);
         yTo(e.clientY);
       };
@@ -87,13 +94,16 @@ const WorkList = () => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     active.current = i;
     imgRefs.current.forEach((img, idx) =>
-      gsap.to(img, { opacity: idx === i ? 1 : 0, duration: 0.3 })
+      gsap.to(img, { opacity: idx === i ? 1 : 0, duration: 0.3, overwrite: "auto" })
     );
     gsap.to(hoverRef.current, {
       opacity: 1,
       scale: 1,
       duration: 0.5,
       ease: "power3.out",
+      // "auto" only clears conflicting opacity/scale tweens — leaves the
+      // x/y cursor-follow (quickTo) tweens on this same element running
+      overwrite: "auto",
     });
   };
 
@@ -104,6 +114,7 @@ const WorkList = () => {
       scale: 0.8,
       duration: 0.4,
       ease: "power3.out",
+      overwrite: "auto",
     });
   };
 

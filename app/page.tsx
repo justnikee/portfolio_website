@@ -5,6 +5,7 @@ import Experience from "./ui/Experience";
 import Work from "./ui/Work";
 import Contact from "./ui/Contact";
 import Ticker from "./components/Ticker";
+import Heisenberg from "./components/Heisenberg";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Experience />
       <TechOverview />
       <Contact />
+      <Heisenberg />
     </main>
   );
 }

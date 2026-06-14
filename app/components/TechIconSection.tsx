@@ -7,12 +7,8 @@ const TechIconSection = () => {
   return (
     <div className="mt-16">
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-        <div
-          className="order-2 lg:order-1 lg:col-span-5"
-          data-parallax
-          data-speed="-28"
-        >
-          <p className="font-[outfit] text-lg leading-relaxed text-[--ink-soft]">
+        <div className="order-2 lg:order-1 lg:col-span-5">
+          <p className="font-[outfit] body-text">
             Three-plus years building for the web. JavaScript — usually
             TypeScript — and React are my staples: a deep ecosystem that lets me
             move fast without cutting corners. Around them, whatever the dish

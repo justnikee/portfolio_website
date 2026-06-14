@@ -5,6 +5,7 @@ import FooterLinks from "../components/FooterLinks";
 import { links, socialLinks } from "../data/footerlinks";
 import LocalTime from "../components/LocalTime";
 import SpotifyEmbed from "../components/SpotifyEmbed";
+import { ElementTile } from "../components/ElementTile";
 import { usePathname } from "next/navigation";
 
 const Footer: React.FC = () => {
@@ -20,10 +21,10 @@ const Footer: React.FC = () => {
       <div className="m-auto max-w-[1500px]">
         <div className="grid grid-cols-1 gap-12 border-t border-[--line] pt-12 md:grid-cols-12">
           <div className="md:col-span-4">
-            <h3 className="mb-3 font-[outfit] text-lg font-semibold">
+            <h3 className="mb-3 font-[outfit] text-3xl font-semibold">
               Nikhil Thakur
             </h3>
-            <p className="mb-7 max-w-xs font-[outfit] leading-6 text-[--ink-soft]">
+            <p className="mb-7 max-w-xs font-[outfit] body-text">
               Frontend developer at Cybergineer Solutions. Open for side-projects
               and collaborations.
             </p>
@@ -48,8 +49,6 @@ const Footer: React.FC = () => {
       {/* Full-bleed wordmark */}
       <div className="relative mt-16 w-screen -translate-x-5 overflow-hidden sm:-translate-x-8">
         <h2
-          data-parallax
-          data-speed="35"
           className="select-none whitespace-nowrap text-center font-[MainFont] uppercase leading-[0.74] tracking-[-0.02em] text-[--ink]"
           style={{ fontSize: "clamp(5rem, 27vw, 30rem)" }}
         >
@@ -65,8 +64,15 @@ const Footer: React.FC = () => {
           <span className="font-[outfit] text-sm text-[--ink-soft]">
             <LocalTime /> — Chandigarh, India
           </span>
-          <span className="font-[outfit] text-sm text-[--ink-soft]">
+          <span className="flex items-center gap-2 font-[outfit] text-sm text-[--ink-soft]">
             Cooked with Next.js &amp; GSAP
+            <span
+              className="ml-1 inline-flex gap-1 text-[0.5rem] opacity-70 transition-opacity hover:opacity-100"
+              title="Breaking Bad"
+            >
+              <ElementTile symbol="Br" number={35} name="Bromine" />
+              <ElementTile symbol="Ba" number={56} name="Barium" />
+            </span>
           </span>
         </div>
       </div>

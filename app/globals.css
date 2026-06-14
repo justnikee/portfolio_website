@@ -294,15 +294,15 @@ footer {
 .eyebrow {
   font-family: "outfit", sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.28em;
-  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  font-size: 0.85rem;
   color: var(--ink-soft);
 }
 
-.rule {
-  height: 1px;
-  width: 100%;
-  background: var(--line);
+.body-text {
+  font-size: 18px;
+  line-height: 24px;
+  color: #333;
 }
 
 /* Animated underline links */
@@ -707,6 +707,99 @@ footer {
   height: 1px;
   background: var(--line);
   z-index: 0;
+}
+
+/* ============================================================
+   PERIODIC TABLE MOTIF — "the cook"
+   ============================================================ */
+/* boxed tile, scales with surrounding font-size */
+.element-tile {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 2.2em;
+  height: 2.2em;
+  padding: 0.15em 0.3em;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  line-height: 1;
+  font-family: "outfit", sans-serif;
+  vertical-align: middle;
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+.element-tile:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+.element-tile__num {
+  font-size: 0.5em;
+  opacity: 0.85;
+}
+.element-tile__sym {
+  font-size: 1.05em;
+  font-weight: 700;
+  margin-top: -0.05em;
+}
+.element-tile--sm {
+  width: 1.9em;
+  height: 1.9em;
+}
+
+/* inline symbol inside display type — colored letters + superscript number */
+.element-mark {
+  position: relative;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.element-mark::after {
+  content: attr(data-num);
+  position: absolute;
+  top: 0.04em;
+  right: -0.62em;
+  font-family: "outfit", sans-serif;
+  font-size: 0.24em;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--accent);
+}
+
+/* easter egg toast */
+.heisenberg-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.1rem 0.7rem 0.7rem;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 10px;
+  font-family: "MainFont", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 1.1rem;
+  box-shadow: 0 20px 50px -20px rgba(24, 21, 18, 0.6);
+  animation: heisenberg-in 0.4s var(--ease);
+}
+.heisenberg-toast .element-tile {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+@keyframes heisenberg-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 /* ============================================================

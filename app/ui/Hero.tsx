@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useLoading } from "../components/LoadingProvider";
-import LocalTime from "../components/LocalTime";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +17,6 @@ const Hero = () => {
       if (isLoading) {
         gsap.set("[data-h-line]", { yPercent: 118, rotate: 3 });
         gsap.set(headline.current, { filter: "blur(12px)", scale: 1.06 });
-        gsap.set("[data-h-top]", { opacity: 0, y: -16 });
         gsap.set("[data-h-fade]", { opacity: 0, y: 26 });
         return;
       }
@@ -29,16 +27,10 @@ const Hero = () => {
       });
 
       tl.fromTo(
-        "[data-h-top]",
-        { opacity: 0, y: -16 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out" }
+        "[data-h-line]",
+        { yPercent: 118, rotate: 3 },
+        { yPercent: 0, rotate: 0, duration: 1.3, stagger: 0.12 }
       )
-        .fromTo(
-          "[data-h-line]",
-          { yPercent: 118, rotate: 3 },
-          { yPercent: 0, rotate: 0, duration: 1.3, stagger: 0.12 },
-          "-=0.6"
-        )
         .fromTo(
           headline.current,
           { filter: "blur(12px)", scale: 1.06 },
@@ -77,28 +69,6 @@ const Hero = () => {
       className="relative flex min-h-[100svh] flex-col px-5 pb-8 pt-[120px] sm:px-8 sm:pb-10"
     >
       <div className="m-auto flex w-full max-w-[1400px] flex-1 flex-col justify-between">
-        {/* top meta */}
-        <div className="flex items-start justify-between">
-          <div data-h-top style={{ opacity: 0 }} className="max-w-[12rem]">
-            <span className="eyebrow block">Frontend Developer</span>
-            <span className="eyebrow block text-[--ink]">— Digital Chef</span>
-          </div>
-          <div
-            data-h-top
-            style={{ opacity: 0 }}
-            className="flex flex-col items-end gap-1 text-right"
-          >
-            <span className="eyebrow flex items-center gap-2 text-[--ink]">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[--accent] opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[--accent]" />
-              </span>
-              Open for work
-            </span>
-            <LocalTime className="eyebrow" />
-          </div>
-        </div>
-
         {/* headline */}
         <h1
           ref={headline}
@@ -124,13 +94,10 @@ const Hero = () => {
 
         {/* bottom row */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <p
-            data-h-fade
-            className="max-w-md font-[outfit] text-base leading-relaxed text-[--ink-soft] sm:text-lg"
-          >
+          <p data-h-fade className="max-w-md font-[outfit] body-text">
             I&apos;m Nikhil — a frontend developer from India plating fast,
-            accessible and story-driven interfaces with Next.js, React and Node.
-            Three years in the kitchen and counting.
+            accessible and story-driven interfaces with Next.js, React and
+            Node. Three years in the kitchen and counting.
           </p>
           <a
             data-h-fade
