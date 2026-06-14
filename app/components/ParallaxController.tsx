@@ -19,35 +19,43 @@ export default function ParallaxController() {
 
   useEffect(() => {
     if (isLoading) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = gsap.context(() => {
-      const els = gsap.utils.toArray<HTMLElement>("[data-parallax]");
-      els.forEach((el) => {
-        const speed = parseFloat(el.dataset.speed || "40");
-        gsap.fromTo(
-          el,
-          { y: speed },
-          {
-            y: -speed,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.1,
-            },
-          }
-        );
-      });
-    });
+    // Parallax floating runs on desktop only (>=768px) and respects
+    // reduced-motion. gsap.matchMedia sets up/tears down automatically
+    // as the viewport crosses the breakpoint, so on mobile the sections
+    // sit still instead of drifting.
+    const mm = gsap.matchMedia();
+
+    mm.add(
+      "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+      () => {
+        const els = gsap.utils.toArray<HTMLElement>("[data-parallax]");
+        els.forEach((el) => {
+          const speed = parseFloat(el.dataset.speed || "40");
+          gsap.fromTo(
+            el,
+            { y: speed },
+            {
+              y: -speed,
+              ease: "none",
+              scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.1,
+              },
+            }
+          );
+        });
+      }
+    );
 
     // Recalculate once everything (fonts/images) has settled.
     const t = setTimeout(() => ScrollTrigger.refresh(), 200);
 
     return () => {
       clearTimeout(t);
-      ctx.revert();
+      mm.revert();
     };
   }, [isLoading]);
 

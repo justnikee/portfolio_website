@@ -12,7 +12,7 @@ export default function BlogHeader() {
         <header className="fixed top-0 left-0 right-0 z-50 py-5 px-6">
             <div className="max-w-4xl mx-auto">
                 <div
-                    className="flex items-center justify-between bg-[#0a0a0a]/80 backdrop-blur-md border border-[#2a2a2a] rounded-full px-6 py-3 shadow-lg shadow-black/20"
+                    className="flex items-center justify-between bg-[--bg]/80 backdrop-blur-md border border-[--line] rounded-full px-6 py-3 shadow-lg shadow-black/5"
                 >
                     {/* Left: Branding */}
                     <div className="flex items-center gap-4">
@@ -22,16 +22,16 @@ export default function BlogHeader() {
                                 alt="Nikhil"
                                 width={90}
                                 height={40}
-                                className="object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                                className="object-contain opacity-80 brightness-0 group-hover:opacity-100 transition-opacity"
                             />
                         </Link>
 
                         {/* Breadcrumb / Separator */}
-                        <span className="text-[#444]">/</span>
+                        <span className="text-[--ink-faint]">/</span>
 
                         <Link
                             href="/posts"
-                            className={`font-[outfit] text-sm ${!isPostPage ? 'text-white' : 'text-[#888] hover:text-white'} transition-colors`}
+                            className={`font-[outfit] text-sm ${!isPostPage ? 'text-[--ink]' : 'text-[--ink-soft] hover:text-[--ink]'} transition-colors`}
                         >
                             Blog
                         </Link>
@@ -41,13 +41,13 @@ export default function BlogHeader() {
                     <div className="flex items-center gap-4">
                         <Link
                             href="/"
-                            className="hidden sm:block text-sm font-[outfit] text-[#888] hover:text-white transition-colors"
+                            className="hidden sm:block text-sm font-[outfit] text-[--ink-soft] hover:text-[--ink] transition-colors"
                         >
                             ← Back to Portfolio
                         </Link>
                         <Link
                             href="/#Contact"
-                            className="bg-white text-black px-4 py-1.5 rounded-full text-sm font-[outfit] font-medium hover:bg-gray-200 transition-colors"
+                            className="bg-[--ink] text-[--bg] px-4 py-1.5 rounded-full text-sm font-[outfit] font-medium hover:bg-[--accent] transition-colors"
                         >
                             Contact
                         </Link>

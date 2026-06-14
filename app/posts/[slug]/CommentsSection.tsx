@@ -17,7 +17,7 @@ export default function CommentsSection({ postId, initialComments }: CommentsSec
 
     return (
         <section className="mt-12">
-            <h2 className="text-xl font-[Heading] text-white uppercase mb-6">
+            <h2 className="text-xl font-[MainFont] text-[--ink] uppercase mb-6">
                 Comments {initialComments.length > 0 && `(${initialComments.length})`}
             </h2>
 
@@ -32,27 +32,27 @@ export default function CommentsSection({ postId, initialComments }: CommentsSec
                     {initialComments.map((comment) => (
                         <div
                             key={comment.id}
-                            className="bg-[#151515] border border-[#2a2a2a] rounded-xl p-5"
+                            className="bg-[--bg-2] border border-[--line] rounded-xl p-5"
                         >
                             <div className="flex items-center gap-3 mb-3">
-                                <div className="w-10 h-10 rounded-full bg-[#2a2a2a] flex items-center justify-center text-white font-medium">
+                                <div className="w-10 h-10 rounded-full bg-[--ink]/10 flex items-center justify-center text-[--ink] font-medium">
                                     {comment.author_name[0].toUpperCase()}
                                 </div>
                                 <div>
-                                    <p className="text-white font-[outfit] font-medium">{comment.author_name}</p>
-                                    <p className="text-[#666] font-[outfit] text-sm">
+                                    <p className="text-[--ink] font-[outfit] font-medium">{comment.author_name}</p>
+                                    <p className="text-[--ink-faint] font-[outfit] text-sm">
                                         {format(new Date(comment.created_at), 'MMM d, yyyy · h:mm a')}
                                     </p>
                                 </div>
                             </div>
-                            <p className="text-white/80 font-[outfit] leading-relaxed">{comment.content}</p>
+                            <p className="text-[--ink-soft] font-[outfit] leading-relaxed">{comment.content}</p>
                         </div>
                     ))}
                 </div>
             )}
 
             {initialComments.length === 0 && (
-                <p className="text-[#666] font-[outfit] text-center py-8">
+                <p className="text-[--ink-faint] font-[outfit] text-center py-8">
                     Be the first to leave a comment!
                 </p>
             )}

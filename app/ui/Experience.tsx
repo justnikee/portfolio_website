@@ -41,7 +41,7 @@ const Experience = () => {
             </p>
             <div>
               <span className="eyebrow block">Worked with</span>
-              <div className="mt-3 inline-block rounded bg-[--ink] px-4 py-3">
+              <div className="mt-3 inline-block rounded py-3">
                 <Image
                   alt="Cybergineer Solutions"
                   height={42}

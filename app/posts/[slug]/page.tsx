@@ -110,13 +110,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     }
 
     return (
-        <article className="py-32 px-4 relative min-h-screen bg-[#0a0a0a] text-white">
+        <article className="py-32 px-4 relative min-h-screen bg-[--bg] text-[--ink]">
             <JsonLd data={jsonLd} />
             <div className="max-w-[800px] mx-auto">
                 {/* Back Link */}
                 <Link
                     href="/posts"
-                    className="inline-flex items-center gap-2 text-[#888] hover:text-white font-[outfit] mb-8 transition-colors"
+                    className="inline-flex items-center gap-2 text-[--ink-soft] hover:text-[--ink] font-[outfit] mb-8 transition-colors"
                 >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -129,17 +129,17 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     {post.category && (
                         <Link
                             href={`/posts?category=${post.category.toLowerCase()}`}
-                            className="inline-block px-3 py-1 bg-white/10 rounded-full text-sm font-[outfit] text-white/80 hover:bg-white/20 transition-colors mb-4"
+                            className="inline-block px-3 py-1 bg-[--ink]/10 rounded-full text-sm font-[outfit] text-[--ink-soft] hover:bg-[--ink]/20 transition-colors mb-4"
                         >
                             {post.category}
                         </Link>
                     )}
 
-                    <h1 className="text-4xl md:text-5xl font-[Heading] text-white uppercase leading-tight mb-6">
+                    <h1 className="text-4xl md:text-5xl font-[MainFont] text-[--ink] uppercase leading-tight mb-6">
                         {post.title}
                     </h1>
 
-                    <div className="flex flex-wrap items-center gap-4 text-[#888] font-[outfit]">
+                    <div className="flex flex-wrap items-center gap-4 text-[--ink-soft] font-[outfit]">
                         <span>
                             {format(new Date(post.published_at || post.created_at), 'MMMM d, yyyy')}
                         </span>
@@ -150,7 +150,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                                 <span>•</span>
                                 <div className="flex gap-2">
                                     {post.tags.map((tag) => (
-                                        <span key={tag} className="text-white/60">#{tag}</span>
+                                        <span key={tag} className="text-[--ink-faint]">#{tag}</span>
                                     ))}
                                 </div>
                             </>
@@ -173,26 +173,26 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
                 {/* Content */}
                 <div
-                    className="prose prose-invert prose-lg max-w-none mb-12
-            prose-headings:font-sans prose-headings:tracking-tight prose-headings:font-bold
+                    className="prose prose-lg max-w-none mb-12
+            prose-headings:font-sans prose-headings:tracking-tight prose-headings:font-bold prose-headings:text-[--ink]
             prose-h1:text-4xl prose-h1:mt-14 prose-h1:mb-6
             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5
             prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
             prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3
-            prose-p:text-white/80 prose-p:font-[outfit] prose-p:leading-relaxed prose-p:text-lg
-            prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-white prose-strong:font-semibold
-            prose-code:bg-[#2a2a2a] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
-            prose-pre:bg-[#151515] prose-pre:border prose-pre:border-[#2a2a2a] prose-pre:rounded-xl
-            prose-ul:text-white/80 prose-ol:text-white/80
+            prose-p:text-[--ink-soft] prose-p:font-[outfit] prose-p:leading-relaxed prose-p:text-lg
+            prose-a:text-[--accent] prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-[--ink] prose-strong:font-semibold
+            prose-code:bg-[--bg-2] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:text-[--ink]
+            prose-pre:bg-[--bg-2] prose-pre:border prose-pre:border-[--line] prose-pre:rounded-xl
+            prose-ul:text-[--ink-soft] prose-ol:text-[--ink-soft]
             prose-li:font-[outfit] prose-li:text-lg
-            prose-blockquote:border-l-white/30 prose-blockquote:text-white/60 prose-blockquote:font-[outfit]
+            prose-blockquote:border-l-[--line] prose-blockquote:text-[--ink-soft] prose-blockquote:font-[outfit]
             prose-img:rounded-xl"
                     dangerouslySetInnerHTML={{ __html: post.content || '' }}
                 />
 
                 {/* Share & Tags */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-6 border-y border-[#2a2a2a]">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-6 border-y border-[--line]">
                     <ShareButtons url={`/posts/${post.slug}`} title={post.title} />
 
                     {post.tags && post.tags.length > 0 && (
@@ -200,7 +200,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                             {post.tags.map((tag) => (
                                 <span
                                     key={tag}
-                                    className="px-3 py-1 bg-[#151515] border border-[#2a2a2a] rounded-full text-sm font-[outfit] text-[#888]"
+                                    className="px-3 py-1 bg-[--bg-2] border border-[--line] rounded-full text-sm font-[outfit] text-[--ink-soft]"
                                 >
                                     #{tag}
                                 </span>
@@ -215,18 +215,18 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 {/* Related Posts */}
                 {relatedPosts.length > 0 && (
                     <section className="mt-16">
-                        <h2 className="text-xl font-[Heading] text-white uppercase mb-6">Related Posts</h2>
+                        <h2 className="text-xl font-[MainFont] text-[--ink] uppercase mb-6">Related Posts</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {relatedPosts.map((relatedPost) => (
                                 <Link
                                     key={relatedPost.id}
                                     href={`/posts/${relatedPost.slug}`}
-                                    className="group block bg-[#151515] border border-[#2a2a2a] rounded-xl p-4 hover:border-[#3a3a3a] transition-colors"
+                                    className="group block bg-[--bg-2] border border-[--line] rounded-xl p-4 hover:border-[--ink]/30 transition-colors"
                                 >
-                                    <h3 className="font-[Heading] text-white uppercase text-sm group-hover:text-[#ccc] transition-colors line-clamp-2">
+                                    <h3 className="font-[MainFont] text-[--ink] uppercase text-sm group-hover:text-[--accent] transition-colors line-clamp-2">
                                         {relatedPost.title}
                                     </h3>
-                                    <p className="text-[#666] font-[outfit] text-xs mt-2">
+                                    <p className="text-[--ink-faint] font-[outfit] text-xs mt-2">
                                         {format(new Date(relatedPost.published_at || relatedPost.created_at), 'MMM d, yyyy')}
                                     </p>
                                 </Link>

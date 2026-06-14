@@ -41,11 +41,11 @@ export default async function PostsPage({
     : posts
 
   return (
-    <div className="py-32 px-4 relative min-h-screen bg-[#0a0a0a] text-white">
+    <div className="py-32 px-4 relative min-h-screen bg-[--bg] text-[--ink]">
       <div className="max-w-[1300px] m-auto">
         <AnimatedHeading heading="Blog" additionalCss="mb-8" />
 
-        <p className="text-[#888] font-[outfit] text-lg text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-[--ink-soft] font-[outfit] text-lg text-center mb-12 max-w-2xl mx-auto">
           Thoughts, tutorials, and insights on development, design, and technology.
         </p>
 
@@ -54,8 +54,8 @@ export default async function PostsPage({
           <Link
             href="/posts"
             className={`px-4 py-2 rounded-full font-[outfit] text-sm transition-colors ${!params.category
-                ? 'bg-white text-black'
-                : 'bg-[#151515] text-[#888] border border-[#2a2a2a] hover:text-white hover:border-[#3a3a3a]'
+                ? 'bg-[--ink] text-[--bg]'
+                : 'bg-[--bg-2] text-[--ink-soft] border border-[--line] hover:text-[--ink] hover:border-[--ink]/30'
               }`}
           >
             All
@@ -65,8 +65,8 @@ export default async function PostsPage({
               key={cat.id}
               href={`/posts?category=${cat.slug}`}
               className={`px-4 py-2 rounded-full font-[outfit] text-sm transition-colors ${params.category === cat.slug
-                  ? 'bg-white text-black'
-                  : 'bg-[#151515] text-[#888] border border-[#2a2a2a] hover:text-white hover:border-[#3a3a3a]'
+                  ? 'bg-[--ink] text-[--bg]'
+                  : 'bg-[--bg-2] text-[--ink-soft] border border-[--line] hover:text-[--ink] hover:border-[--ink]/30'
                 }`}
             >
               {cat.name}
@@ -77,13 +77,13 @@ export default async function PostsPage({
         {/* Posts Grid */}
         {filteredPosts.length === 0 ? (
           <div className="text-center py-20">
-            <svg className="w-16 h-16 mx-auto text-[#333] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-16 h-16 mx-auto text-[--ink-faint] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
             </svg>
-            <p className="text-[#666] font-[outfit] text-lg">
+            <p className="text-[--ink-soft] font-[outfit] text-lg">
               {params.category ? 'No posts in this category yet' : 'No posts yet'}
             </p>
-            <p className="text-[#555] font-[outfit] mt-2">
+            <p className="text-[--ink-faint] font-[outfit] mt-2">
               Check back soon for new content!
             </p>
           </div>

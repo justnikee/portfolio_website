@@ -53,7 +53,7 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
 
     return (
         <div className="flex items-center gap-3">
-            <span className="text-[#888] font-[outfit] text-sm">Share:</span>
+            <span className="text-[--ink-soft] font-[outfit] text-sm">Share:</span>
 
             {shareLinks.map((link) => (
                 <a
@@ -61,7 +61,7 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 text-[#888] hover:text-white hover:bg-[#2a2a2a] rounded-lg transition-colors"
+                    className="p-2 text-[--ink-soft] hover:text-[--ink] hover:bg-[--ink]/10 rounded-lg transition-colors"
                     title={`Share on ${link.name}`}
                 >
                     {link.icon}
@@ -70,11 +70,11 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
 
             <button
                 onClick={copyLink}
-                className="p-2 text-[#888] hover:text-white hover:bg-[#2a2a2a] rounded-lg transition-colors relative"
+                className="p-2 text-[--ink-soft] hover:text-[--ink] hover:bg-[--ink]/10 rounded-lg transition-colors relative"
                 title="Copy link"
             >
                 {copied ? (
-                    <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                 ) : (

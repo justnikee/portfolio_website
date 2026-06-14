@@ -44,7 +44,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* warm paper vignette */
 body::after {
   content: "";
   position: fixed;
@@ -61,7 +60,7 @@ body::after {
 }
 
 /* film grain */
-body::before {
+/* body::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -71,7 +70,7 @@ body::before {
   mix-blend-mode: multiply;
   background: url("../public/main_images/bg-noise.7485933b.png") 20px 20px
     repeat;
-}
+} */
 
 body.is-loading {
   overflow: hidden;
@@ -125,8 +124,11 @@ footer {
   width: 42px;
   height: 42px;
   border: 1.5px solid var(--ink);
-  transition: width 0.35s var(--ease), height 0.35s var(--ease),
-    background-color 0.35s var(--ease), border-color 0.35s var(--ease),
+  transition:
+    width 0.35s var(--ease),
+    height 0.35s var(--ease),
+    background-color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
     opacity 0.3s ease;
 }
 
@@ -187,7 +189,7 @@ footer {
 
 .reveal-panel {
   flex: 1;
-  background: var(--ink);
+  background: var(--accent);
   transform: scaleY(1);
   transform-origin: top;
 }
@@ -243,6 +245,40 @@ footer {
 }
 
 /* ============================================================
+   ROUTE LOADING BAR
+   ============================================================ */
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1100;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.loading-bar__progress {
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: var(--accent);
+  animation: loading-bar-slide 1.1s ease-in-out infinite;
+}
+
+@keyframes loading-bar-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(60%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+/* ============================================================
    TYPE REVEAL HELPERS
    ============================================================ */
 .line-mask {
@@ -290,10 +326,64 @@ footer {
   transform-origin: left;
 }
 
-/* outline display word */
+/* display word — brushed silver with an orange glint sweep */
 .outline-word {
-  -webkit-text-stroke: 1.5px var(--ink);
+  position: relative;
   color: transparent;
+  /* layer 1: moving orange specular highlight   layer 2: static silver banding */
+  background-image:
+    linear-gradient(
+      100deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(216, 58, 28, 0.45) 46%,
+      #ff7a3c 50%,
+      rgba(216, 58, 28, 0.45) 54%,
+      transparent 62%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 18%,
+      #ffffff 40%,
+      #ffffff 50%,
+      #ffffff 60%,
+      #ffffff 82%,
+      #ffffff 100%
+    );
+  background-size:
+    250% 100%,
+    100% 100%;
+  background-repeat: no-repeat;
+  background-position:
+    125% 0,
+    0 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: outline-shine 5.5s linear infinite;
+}
+
+@keyframes outline-shine {
+  from {
+    background-position:
+      125% 0,
+      0 0;
+  }
+  to {
+    background-position:
+      -125% 0,
+      0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outline-word {
+    animation: none;
+    background-position:
+      50% 0,
+      0 0;
+  }
 }
 
 .accent-text {
@@ -340,6 +430,7 @@ footer {
   flex-shrink: 0;
   align-items: center;
   animation: ticker 28s linear infinite;
+  gap: 1.2em;
 }
 
 .ticker:hover .ticker__track {
@@ -418,7 +509,9 @@ footer {
 .cap-row > *:not(.cap-row__fill) {
   position: relative;
   z-index: 1;
-  transition: color 0.45s var(--ease), transform 0.45s var(--ease);
+  transition:
+    color 0.45s var(--ease),
+    transform 0.45s var(--ease);
 }
 .cap-row:hover > *:not(.cap-row__fill) {
   color: var(--bg);
@@ -461,7 +554,9 @@ footer {
   font-size: clamp(1.9rem, 6vw, 4.6rem);
   line-height: 0.95;
   letter-spacing: -0.01em;
-  transition: transform 0.5s var(--ease), color 0.4s var(--ease);
+  transition:
+    transform 0.5s var(--ease),
+    color 0.4s var(--ease);
 }
 
 .work-row__meta {
@@ -488,8 +583,8 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  width: clamp(220px, 22vw, 330px);
-  height: clamp(260px, 26vw, 390px);
+  width: clamp(320px, 32vw, 480px);
+  height: clamp(200px, 20vw, 300px);
   pointer-events: none;
   z-index: 40;
   overflow: hidden;
@@ -589,7 +684,12 @@ footer {
 
 /* gradient text retained for footer marquee, re-tuned to palette */
 .gradient-text {
-  background-image: linear-gradient(90deg, var(--accent-2), var(--ink), var(--accent));
+  background-image: linear-gradient(
+    90deg,
+    var(--accent-2),
+    var(--ink),
+    var(--accent)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -613,8 +713,11 @@ footer {
    FLAT HEADER
    ============================================================ */
 .site-header {
-  transition: transform 0.5s var(--ease-inout), background-color 0.4s ease,
-    border-color 0.4s ease, backdrop-filter 0.4s ease;
+  transition:
+    transform 0.5s var(--ease-inout),
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    backdrop-filter 0.4s ease;
   border-bottom: 1px solid transparent;
 }
 .site-header.is-scrolled {
@@ -638,7 +741,9 @@ footer {
   padding: 0.7rem 0.9rem;
   background: rgba(24, 21, 18, 0.03);
   max-width: 320px;
-  transition: border-color 0.4s var(--ease), background-color 0.4s var(--ease);
+  transition:
+    border-color 0.4s var(--ease),
+    background-color 0.4s var(--ease);
 }
 .now-playing:hover {
   border-color: var(--ink);
@@ -719,9 +824,13 @@ footer {
   position: absolute;
   opacity: 1;
   z-index: -10;
-  stroke: rgba(255, 250, 245, 0.06);
+  stroke: rgba(24, 21, 18, 0.06);
   width: 100%;
-  -webkit-mask-image: radial-gradient(60% 50% at center center, #00143d, transparent);
+  -webkit-mask-image: radial-gradient(
+    60% 50% at center center,
+    #00143d,
+    transparent
+  );
   mask-image: radial-gradient(60% 50% at center center, #00143d, transparent);
   inset: 0;
   height: 100%;

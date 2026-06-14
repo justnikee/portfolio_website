@@ -46,34 +46,6 @@ const projects: Project[] = [
     image: "/main_images/stateofkind.png",
     link: "https://github.com/justnikee/next.stateofkind",
   },
-  {
-    title: "PlanetDesert",
-    year: "2023—",
-    meta: "Shopify · Maintained",
-    image: "/main_images/planetdesert.png",
-    link: "https://planetdesert.com",
-  },
-  {
-    title: "Paufashion",
-    year: "2023",
-    meta: "Shopify · Built from scratch",
-    image: "/main_images/pau-fashion.png",
-    link: "https://paufashion.com/",
-  },
-  {
-    title: "Knovus",
-    year: "2023",
-    meta: "Shopify · End to end",
-    image: "/main_images/knovus.png",
-    link: "https://www.knovus.com.au/",
-  },
-  {
-    title: "E-commerce API",
-    year: "2024",
-    meta: "Node · Express · MongoDB",
-    image: "/main_images/rb_2149379656.png",
-    link: "https://github.com/justnikee/Backend",
-  },
 ];
 
 const WorkList = () => {
@@ -97,8 +69,16 @@ const WorkList = () => {
         xTo(e.clientX);
         yTo(e.clientY);
       };
+      const onScroll = () => {
+        active.current = -1;
+        gsap.to(hover, { opacity: 0, scale: 0.8, duration: 0.4, ease: "power3.out" });
+      };
       window.addEventListener("mousemove", onMove);
-      return () => window.removeEventListener("mousemove", onMove);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => {
+        window.removeEventListener("mousemove", onMove);
+        window.removeEventListener("scroll", onScroll);
+      };
     },
     { scope: root }
   );

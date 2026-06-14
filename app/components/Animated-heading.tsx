@@ -44,7 +44,7 @@ export default function AnimatedHeading({ heading, additionalCss }: { heading: s
 
   return (
     <>
-      <h2 ref={animate_heading} className={`text-5xl leading-[3.5rem] sm:text-[5rem] font-[Heading] uppercase sm:leading-[5rem] text-center ${additionalCss}`}>{heading}</h2>
+      <h2 ref={animate_heading} className={`text-5xl leading-[3.5rem] sm:text-[5rem] font-[MainFont] uppercase sm:leading-[5rem] text-center text-[--ink] ${additionalCss}`}>{heading}</h2>
     </>
   )
 }
