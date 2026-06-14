@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 
 import SmoothScrolling from "./components/SmoothScroll";
-
+import LoadingProvider from "./components/LoadingProvider";
+import CustomCursor from "./components/CustomCursor";
+import ParallaxController from "./components/ParallaxController";
 
 export const metadata: Metadata = {
-  title: "Nikhil - Personal Portfolio",
-  description: "My personal portfolio website",
+  title: "Nikhil Thakur — Cooking Things For Web",
+  description:
+    "Nikhil Thakur is a frontend developer from India crafting engaging, accessible and visually striking web experiences with Next.js, React and Node.js.",
 };
 
 export default function RootLayout({
@@ -21,29 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-        <Header />
-        <SmoothScrolling>{children}</SmoothScrolling>
-        <Footer />
-        <svg aria-hidden="true" className="svg-grid">
-          <defs>
-            <pattern
-              id="hero"
-              width="80"
-              height="80"
-              x="50%"
-              y="-1"
-              patternUnits="userSpaceOnUse"
-            >
-              <path d="M.5 200V.5H200" fill="none"></path>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect>
-        </svg>
-        <Analytics/>
-        <SpeedInsights/>
+      <body className={`antialiased`}>
+        <CustomCursor />
+        <LoadingProvider>
+          <Header />
+          <SmoothScrolling>{children}</SmoothScrolling>
+          <Footer />
+          <ParallaxController />
+        </LoadingProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -2,65 +2,30 @@
 
 import React from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const TechIconSection = () => {
-  const iconsectionref = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    gsap.fromTo(
-      iconsectionref.current,
-      {
-        opacity: 0,
-        y: 150,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: iconsectionref.current,
-          start: "top 80%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse",
-        },
-        ease: "power2.inOut",
-      }
-    );
-  }, []);
-
   return (
-    <div ref={iconsectionref}>
-      <div className="flex justify-center mt-7">
-        <Image
-          className="absolute"
-          src="/main_images/tech-bg.svg"
-          width={600}
-          height={100}
-          alt="dots"
-        />
-        <div>
-          <div className="w-[400px] mt-14 m-auto">
-            <div className="maskImage">
-              <div className="flex justify-center gap-7 items-center">
-                <TechIcons />
-                <TechIcons />
-                <TechIcons />
-              </div>
+    <div className="mt-16">
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+        <div
+          className="order-2 lg:order-1 lg:col-span-5"
+          data-parallax
+          data-speed="-28"
+        >
+          <p className="font-[outfit] text-lg leading-relaxed text-[--ink-soft]">
+            Three-plus years building for the web. JavaScript — usually
+            TypeScript — and React are my staples: a deep ecosystem that lets me
+            move fast without cutting corners. Around them, whatever the dish
+            calls for.
+          </p>
+        </div>
+        <div className="order-1 w-full overflow-hidden lg:order-2 lg:col-span-7">
+          <div className="maskImage !h-[80px]">
+            <div className="flex items-center justify-center gap-7">
+              <TechIcons />
+              <TechIcons />
+              <TechIcons />
             </div>
-          </div>
-          <div>
-            <p className="font-[outfit] text-xl mt-16 max-w-[900px] text-center m-auto">
-              With over 3+ years of experience building for the web. JavaScript
-              (or TypeScript) and React remains my preferred tools for web
-              applications. The adaptability and extensive ecosystem empower me
-              to deliver rapid and scalable solutions with ease.
-            </p>
           </div>
         </div>
       </div>

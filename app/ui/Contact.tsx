@@ -1,56 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useState, useRef } from "react";
+import Magnetic from "../components/Magnetic";
 
 const Contact = () => {
-  const emailRef = useRef<HTMLHeadingElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const subHeadingRef = useRef<HTMLParagraphElement>(null);
-  const emailButtonRef = useRef<HTMLDivElement>(null);
+  const emailRef = useRef<HTMLSpanElement>(null);
   const [copyText, setCopyText] = useState("Copy");
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#Contact",
-        start: "top 85%",
-        end: "bottom 40%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    tl.from(headingRef.current, {
-      opacity: 0,
-      y: 80,
-      duration: 0.8,
-      ease: "power3.out",
-    })
-      .from(
-        subHeadingRef.current,
-        {
-          opacity: 0,
-          y: 60,
-          duration: 0.8,
-          ease: "power3.out",
-        },
-        "-=0.4"
-      )
-      .from(
-        emailButtonRef.current,
-        {
-          opacity: 0,
-          y: 40,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-        "-=0.4"
-      );
-  }, []);
 
   const handleCopy = () => {
     if (emailRef.current) {
@@ -58,52 +12,73 @@ const Contact = () => {
         .writeText(emailRef.current.textContent || "")
         .then(() => {
           setCopyText("Copied");
-          setTimeout(() => {
-            setCopyText("Copy");
-          }, 2000);
+          setTimeout(() => setCopyText("Copy"), 2000);
         })
-        .catch((error) => {
-          console.log("Failed to copy:", error);
-        });
+        .catch((error) => console.log("Failed to copy:", error));
     }
   };
 
   return (
-    <div id="Contact" className="flex justify-center py-32 px-5">
-      <div className="sm:px-[32px] w-full sm:py-0 max-w-[1300px] m-auto relative">
-        <h2
-          ref={headingRef}
-          className="font-[Heading] text-5xl leading-[3.5rem] md:text-7xl md:leading-[5rem] font-extrabold text-center mb-3"
-        >
-          Let&apos;s Build Something Great!!
-        </h2>
-        <p
-          ref={subHeadingRef}
-          className="font-[outfit] text-2xl text-[#fffaf5] max-w-3xl text-center mb-5 sm:text-center sm:m-auto sm:mb-5"
-        >
-          I&apos;m always open to new opportunities, collaborations, and
-          connections. Feel free to reach out to ask a question, share your
-          project idea, talk about cats or the meaning of life.
-        </p>
+    <section id="Contact" className="px-5 py-28 sm:px-8 sm:py-40">
+      <div className="m-auto max-w-[1400px]">
         <div
-          ref={emailButtonRef}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="mb-12 flex items-center gap-4"
+          data-parallax
+          data-speed="25"
         >
-          <h4
-            ref={emailRef}
-            className="font-[Heading] text-4xl sm:text-[56px] leading-[56px] text-[#fffaf5]"
+          <span className="eyebrow">(05) — Contact</span>
+          <span className="rule flex-1" />
+        </div>
+
+        <p
+          data-parallax
+          data-speed="-28"
+          className="mb-8 max-w-2xl font-[outfit] text-lg leading-relaxed text-[--ink-soft] sm:text-xl"
+        >
+          Got something worth cooking? I&apos;m open to new work, collaborations
+          and the occasional chat about cats or the meaning of life.
+        </p>
+
+        <h2
+          data-parallax
+          data-speed="45"
+          className="font-[MainFont] uppercase leading-[0.9] tracking-[-0.02em]"
+        >
+          <span className="block" style={{ fontSize: "clamp(2.6rem, 11vw, 9rem)" }}>
+            Let&apos;s make
+          </span>
+          <span className="block" style={{ fontSize: "clamp(2.6rem, 11vw, 9rem)" }}>
+            something
+          </span>
+          <span
+            className="block accent-text"
+            style={{ fontSize: "clamp(2.6rem, 11vw, 9rem)" }}
           >
-            contact@doitnikhil.in
-          </h4>
-          <div
-            onClick={handleCopy}
-            className="text-[19px] w-full text-center sm:w-fit font-[outfit] copy_button h-fit px-6 py-2 rounded-lg cursor-pointer"
+            worth serving.
+          </span>
+        </h2>
+
+        <div className="mt-14 flex flex-col items-start gap-6 border-t border-[--line] pt-10 sm:flex-row sm:items-center sm:justify-between">
+          <a
+            href="mailto:contact@doitnikhil.in"
+            data-cursor="text"
+            data-cursor-label="Copy"
+            className="link-underline font-[MainFont] text-2xl uppercase tracking-tight sm:text-5xl"
           >
-            {copyText}
-          </div>
+            <span ref={emailRef}>contact@doitnikhil.in</span>
+          </a>
+          <Magnetic strength={0.4}>
+            <button
+              onClick={handleCopy}
+              data-cursor="hover"
+              className="copy_button rounded-full px-7 py-3 font-[outfit] text-sm uppercase tracking-[0.12em]"
+            >
+              {copyText}
+            </button>
+          </Magnetic>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
