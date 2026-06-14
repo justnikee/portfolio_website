@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Experiance = () => {
+const Experience = () => {
   return (
     <section id="MoreAboutMe" className="px-5 py-24 sm:px-8 sm:py-32">
       <div className="m-auto max-w-[1400px]">
@@ -57,4 +57,4 @@ const Experiance = () => {
   );
 };
 
-export default Experiance;
+export default Experience;

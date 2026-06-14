@@ -19,6 +19,27 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "Export Ready",
+    year: "2025",
+    meta: "Next.js · Supabase · Golang",
+    image: "/erbattery.png",
+    link: "https://export-ready.vercel.app/",
+  },
+  {
+    title: "Vyoma Studio",
+    year: "2025",
+    meta: "Astro · GSAP · Tailwind",
+    image: "/vyoma-studio.png",
+    link: "https://vyoma-studio-iota.vercel.app/",
+  },
+  {
+    title: "SS-Aevi",
+    year: "2025",
+    meta: "Next.js · Supabase · Prisma",
+    image: "/Aevi.png",
+    link: "https://ss-aevi.vercel.app/",
+  },
+  {
     title: "State of Kind",
     year: "2024",
     meta: "Next.js Storefront",

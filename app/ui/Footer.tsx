@@ -5,8 +5,16 @@ import FooterLinks from "../components/FooterLinks";
 import { links, socialLinks } from "../data/footerlinks";
 import LocalTime from "../components/LocalTime";
 import SpotifyEmbed from "../components/SpotifyEmbed";
+import { usePathname } from "next/navigation";
 
 const Footer: React.FC = () => {
+  const pathname = usePathname();
+
+  // Skip footer on admin routes
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <footer className="overflow-hidden px-5 pb-8 pt-24 sm:px-8 sm:pt-32">
       <div className="m-auto max-w-[1500px]">

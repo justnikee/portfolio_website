@@ -706,3 +706,23 @@ footer {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================
+   BLOG (dark section — /posts, /admin)
+   ============================================================ */
+@font-face {
+  font-family: "HeadingThin";
+  src: url("./fonts/46a96903ce28a9c5-s.p (1).ttf") format("truetype");
+}
+
+.svg-grid-work {
+  position: absolute;
+  opacity: 1;
+  z-index: -10;
+  stroke: rgba(255, 250, 245, 0.06);
+  width: 100%;
+  -webkit-mask-image: radial-gradient(60% 50% at center center, #00143d, transparent);
+  mask-image: radial-gradient(60% 50% at center center, #00143d, transparent);
+  inset: 0;
+  height: 100%;
+}

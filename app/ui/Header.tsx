@@ -6,6 +6,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import Magnetic from "../components/Magnetic";
 import { useLoading } from "../components/LoadingProvider";
+import { usePathname } from "next/navigation";
+import BlogHeader from "../components/BlogHeader";
 
 type NavItem = { label: string; href: string; id?: string };
 
@@ -17,6 +19,18 @@ const navItems: NavItem[] = [
 ];
 
 const Header = () => {
+  const pathname = usePathname();
+
+  // Skip header on admin routes
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
+  // Use specific header for blog pages
+  if (pathname?.startsWith("/posts")) {
+    return <BlogHeader />;
+  }
+
   const { isLoading } = useLoading();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
