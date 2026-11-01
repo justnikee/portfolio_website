@@ -1,31 +1,16 @@
-import { createServerSupabaseClient } from '@/app/lib/supabase-server'
+import { getPublishedPosts, getPublicCategories } from '@/app/lib/public-posts'
+import { defaultSocialImage } from '@/app/lib/site'
 import PostCard from '@/app/components/posts/PostCard'
 import AnimatedHeading from '@/app/components/Animated-heading'
-import type { Post, Category } from '@/app/lib/types'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
-  title: 'Blog | Nikhil',
-  description: 'Thoughts on development, design, and technology',
-}
-
-async function getPosts() {
-  const supabase = await createServerSupabaseClient()
-  const { data } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('published', true)
-    .order('published_at', { ascending: false })
-
-  return data as Post[] || []
-}
-
-async function getCategories() {
-  const supabase = await createServerSupabaseClient()
-  const { data } = await supabase.from('categories').select('*')
-  return data as Category[] || []
+  title: 'Posts — Frontend & Product Development',
+  description: 'Practical frontend engineering, full-stack development, and lessons from building Anviora by Nikhil Thakur.',
+  alternates: { canonical: '/posts' },
+  openGraph: { title: 'Posts by Nikhil Thakur', description: 'Frontend engineering and lessons from building products.', url: '/posts', type: 'website', images: [defaultSocialImage] },
 }
 
 export default async function PostsPage({
@@ -34,14 +19,14 @@ export default async function PostsPage({
   searchParams: Promise<{ category?: string }>
 }) {
   const params = await searchParams
-  const [posts, categories] = await Promise.all([getPosts(), getCategories()])
+  const [posts, categories] = await Promise.all([getPublishedPosts(), getPublicCategories()])
 
   const filteredPosts = params.category
     ? posts.filter(p => p.category?.toLowerCase() === params.category?.toLowerCase())
     : posts
 
   return (
-    <div className="py-32 px-4 relative min-h-screen bg-[--bg] text-[--ink]">
+    <main id="main-content" className="py-32 px-4 relative min-h-screen bg-[--bg] text-[--ink]">
       <div className="max-w-[1300px] m-auto">
         <AnimatedHeading heading="Blog" additionalCss="mb-8" />
 
@@ -105,6 +90,6 @@ export default async function PostsPage({
         </defs>
         <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect>
       </svg>
-    </div>
+    </main>
   )
 }

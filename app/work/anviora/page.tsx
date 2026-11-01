@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PassportVisual from "@/app/components/PassportVisual";
+import { defaultSocialImage } from "@/app/lib/site";
 
 export const metadata: Metadata = {
   title: "Anviora — Battery DPP Case Study",
   description: "An in-progress look at Anviora, a battery digital product passport platform Nikhil Thakur is building solo for Indian manufacturers and exporters.",
   alternates: { canonical: "/work/anviora" },
+  openGraph: { title: "Anviora — Battery DPP Case Study", description: "An independent battery digital product passport platform, built by Nikhil Thakur. Case study in progress.", url: "/work/anviora", type: "website", images: [defaultSocialImage] },
 };
 
 const directions = [

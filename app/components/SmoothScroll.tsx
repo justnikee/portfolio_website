@@ -3,6 +3,7 @@ import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import { ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +18,9 @@ function LenisBridge() {
 }
 
 function SmoothScrolling({ children }: Props) {
+  const pathname = usePathname();
+  // Articles and admin pages use native scrolling and skip the Lenis ticker.
+  if (pathname?.startsWith("/posts") || pathname?.startsWith("/admin")) return <>{children}</>;
   return (
     <ReactLenis
       root

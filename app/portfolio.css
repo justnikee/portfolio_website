@@ -258,3 +258,9 @@ a, button { -webkit-tap-highlight-color: transparent; }
   transform: scaleX(1);
   transform-origin: left;
 }
+
+/* Keep long code and embedded media inside the article column. */
+.post-content { overflow-wrap: anywhere; }
+.post-content pre { overflow-x: auto; overflow-wrap: normal; }
+.post-content img { max-width: 100%; height: auto; }
+.post-content iframe { max-width: 100%; aspect-ratio: 16 / 9; height: auto; }

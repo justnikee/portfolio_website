@@ -1,14 +1,14 @@
 import { MetadataRoute } from 'next'
+import { siteUrl } from './lib/site'
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://doitnikhil.in'
 
     return {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: '/admin/',
+            disallow: ['/admin', '/admin/', '/api/'],
         },
-        sitemap: `${baseUrl}/sitemap.xml`,
+        sitemap: `${siteUrl}/sitemap.xml`,
     }
 }

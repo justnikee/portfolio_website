@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import Preloader from "./Preloader";
+import { usePathname } from "next/navigation";
 
 type LoadingContextType = {
   isLoading: boolean;
@@ -21,21 +22,24 @@ export default function LoadingProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showPreloader, setShowPreloader] = useState(true);
+  const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(pathname === "/");
+  const [showPreloader, setShowPreloader] = useState(pathname === "/");
+  const introVisible = pathname === "/" && showPreloader;
 
   // Lock body scroll while the preloader is on screen.
   useEffect(() => {
-    if (showPreloader) {
+    if (introVisible) {
       document.body.classList.add("is-loading");
     } else {
       document.body.classList.remove("is-loading");
     }
-  }, [showPreloader]);
+    return () => document.body.classList.remove("is-loading");
+  }, [introVisible]);
 
   return (
-    <LoadingContext.Provider value={{ isLoading }}>
-      {showPreloader && <Preloader
+    <LoadingContext.Provider value={{ isLoading: pathname === "/" && isLoading }}>
+      {introVisible && <Preloader
         onReveal={() => setIsLoading(false)}
         onComplete={() => { setIsLoading(false); setShowPreloader(false); }}
       />}

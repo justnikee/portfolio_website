@@ -3,52 +3,47 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { createServerSupabaseClient } from '@/app/lib/supabase-server'
-import type { Post, Comment } from '@/app/lib/types'
+import type { Comment } from '@/app/lib/types'
 import { format } from 'date-fns'
 import CommentsSection from './CommentsSection'
 import ShareButtons from '@/app/components/posts/ShareButtons'
 import JsonLd from '@/app/components/JsonLd'
+import { getPublishedPost, getPublishedPosts } from '@/app/lib/public-posts'
+import { siteUrl, defaultSocialImage, author } from '@/app/lib/site'
 
 export const dynamic = 'force-dynamic'
 
-async function getPost(slug: string) {
-    const supabase = await createServerSupabaseClient()
-    const { data } = await supabase
-        .from('posts')
-        .select('*')
-        .eq('slug', slug)
-        .eq('published', true)
-        .single()
-
-    return data as Post | null
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params
-    const post = await getPost(slug)
+    const post = await getPublishedPost(slug)
 
     if (!post) {
         return {
             title: 'Post Not Found',
+            robots: { index: false },
         }
     }
 
     return {
         title: post.title,
         description: post.excerpt,
+        alternates: { canonical: `/posts/${post.slug}` },
+        authors: [{ name: 'Nikhil Thakur', url: `${siteUrl}/#About` }],
         openGraph: {
             title: post.title,
             description: post.excerpt || undefined,
             type: 'article',
+            url: `/posts/${post.slug}`,
+            modifiedTime: post.updated_at,
             publishedTime: post.published_at || post.created_at,
-            authors: ['Nikhil'],
-            images: post.featured_image ? [post.featured_image] : [],
+            authors: ['Nikhil Thakur'],
+            images: post.featured_image ? [post.featured_image] : [defaultSocialImage],
         },
         twitter: {
             card: 'summary_large_image',
             title: post.title,
             description: post.excerpt || undefined,
-            images: post.featured_image ? [post.featured_image] : [],
+            images: post.featured_image ? [post.featured_image] : [defaultSocialImage],
         }
     }
 }
@@ -67,24 +62,13 @@ async function getComments(postId: string) {
 
 async function getRelatedPosts(category: string | null, currentId: string) {
     if (!category) return []
-
-    const supabase = await createServerSupabaseClient()
-    const { data } = await supabase
-        .from('posts')
-        .select('*')
-        .eq('category', category)
-        .eq('published', true)
-        .neq('id', currentId)
-        .limit(3)
-
-    return data as Post[] || []
+    const posts = await getPublishedPosts()
+    return posts.filter(post => post.category === category && post.id !== currentId).slice(0, 3)
 }
-
-
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
-    const post = await getPost(slug)
+    const post = await getPublishedPost(slug)
 
     if (!post) {
         notFound()
@@ -103,14 +87,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         image: post.featured_image ? [post.featured_image] : [],
         datePublished: post.published_at || post.created_at,
         dateModified: post.updated_at,
-        author: {
-            '@type': 'Person',
-            name: 'Nikhil',
-        },
+        author,
+        url: `${siteUrl}/posts/${post.slug}`,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/posts/${post.slug}` },
     }
 
     return (
-        <article className="py-32 px-4 relative min-h-screen bg-[--bg] text-[--ink]">
+        <main id="main-content" className="py-32 px-4 relative min-h-screen bg-[--bg] text-[--ink]">
             <JsonLd data={jsonLd} />
             <div className="max-w-[800px] mx-auto">
                 {/* Back Link */}
@@ -148,7 +131,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                         {post.tags && post.tags.length > 0 && (
                             <>
                                 <span>•</span>
-                                <div className="flex gap-2">
+                                <div className="flex flex-wrap gap-2">
                                     {post.tags.map((tag) => (
                                         <span key={tag} className="text-[--ink-faint]">#{tag}</span>
                                     ))}
@@ -158,13 +141,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     </div>
                 </header>
 
+                <p className="mb-8 text-sm text-[--ink-soft]">By <Link href="/#About" className="underline underline-offset-4">Nikhil Thakur</Link> · Frontend developer building full-stack products.</p>
+
                 {/* Featured Image */}
                 {post.featured_image && (
-                    <div className="relative h-[400px] rounded-2xl overflow-hidden mb-10">
+                    <div className="relative aspect-[2/1] rounded-2xl overflow-hidden mb-10">
                         <Image
                             src={post.featured_image}
                             alt={post.title}
                             fill
+                            sizes="(max-width: 832px) calc(100vw - 32px), 800px"
                             className="object-cover"
                             priority
                         />
@@ -173,7 +159,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
                 {/* Content */}
                 <div
-                    className="prose prose-lg max-w-none mb-12
+                    className="post-content prose prose-lg max-w-none mb-12
             prose-headings:font-sans prose-headings:tracking-tight prose-headings:font-bold prose-headings:text-[--ink]
             prose-h1:text-4xl prose-h1:mt-14 prose-h1:mb-6
             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5
@@ -245,6 +231,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 </defs>
                 <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect>
             </svg>
-        </article>
+        </main>
     )
 }

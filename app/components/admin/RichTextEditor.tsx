@@ -10,6 +10,16 @@ import { common, createLowlight } from 'lowlight'
 
 const lowlight = createLowlight(common)
 
+const SizedImage = Image.extend({
+    addAttributes() {
+        return {
+            ...this.parent?.(),
+            width: { default: null },
+            height: { default: null },
+        }
+    },
+})
+
 interface RichTextEditorProps {
     content: string
     onChange: (html: string) => void
@@ -49,7 +59,14 @@ function MenuBar({ editor }: { editor: Editor | null }) {
     const addImage = () => {
         const url = window.prompt('Enter image URL:')
         if (url) {
-            editor.chain().focus().setImage({ src: url }).run()
+            const image = new window.Image()
+            const insert = (width?: number, height?: number) => {
+                if (editor.isDestroyed) return
+                editor.chain().focus().insertContent({ type: 'image', attrs: { src: url, width, height } }).run()
+            }
+            image.onload = () => insert(image.naturalWidth, image.naturalHeight)
+            image.onerror = () => insert()
+            image.src = url
         }
     }
 
@@ -226,9 +243,11 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Start
             StarterKit.configure({
                 codeBlock: false,
             }),
-            Image.configure({
+            SizedImage.configure({
                 HTMLAttributes: {
                     class: 'max-w-full rounded-lg my-4',
+                    loading: 'lazy',
+                    decoding: 'async',
                 },
             }),
             Link.configure({

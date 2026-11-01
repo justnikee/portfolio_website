@@ -10,9 +10,10 @@ import SmoothScrolling from "./components/SmoothScroll";
 import LoadingProvider from "./components/LoadingProvider";
 import CustomCursor from "./components/CustomCursor";
 import ParallaxController from "./components/ParallaxController";
+import { siteUrl, defaultSocialImage } from "./lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://doitnikhil.in"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Nikhil Thakur — Developer & Product Builder",
     template: "%s | Nikhil Thakur",
@@ -24,10 +25,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Nikhil Thakur",
+    images: [{ url: defaultSocialImage, width: 1200, height: 630, alt: "Nikhil Thakur — Developer & Product Builder" }],
   },
   twitter: {
     card: "summary_large_image",
+    images: [defaultSocialImage],
   },
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || undefined },
   robots: {
     index: true,
     follow: true,

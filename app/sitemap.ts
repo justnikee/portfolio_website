@@ -1,41 +1,29 @@
-import { MetadataRoute } from 'next'
-import { createServerSupabaseClient } from '@/app/lib/supabase-server'
+import type { MetadataRoute } from 'next'
+import { getPublishedPosts } from '@/app/lib/public-posts'
+import { siteUrl } from '@/app/lib/site'
+
+export const revalidate = 60
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://doitnikhil.in'
-    const supabase = await createServerSupabaseClient()
-
-    // Fetch all published posts
-    const { data: posts } = await supabase
-        .from('posts')
-        .select('slug, updated_at')
-        .eq('published', true)
-
-    const postUrls = (posts || []).map((post) => ({
-        url: `${baseUrl}/posts/${post.slug}`,
-        lastModified: new Date(post.updated_at),
-        changeFrequency: 'weekly' as const,
-        priority: 0.8,
-    }))
-
-    return [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/work/anviora`,
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/posts`,
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 0.9,
-        },
-        ...postUrls,
+    const pages: MetadataRoute.Sitemap = [
+        { url: siteUrl, changeFrequency: 'monthly', priority: 1 },
+        { url: `${siteUrl}/work/anviora`, changeFrequency: 'monthly', priority: 0.9 },
+        { url: `${siteUrl}/posts`, changeFrequency: 'weekly', priority: 0.9 },
     ]
+    try {
+        const posts = await getPublishedPosts()
+        return [...pages, ...posts.map(post => {
+            const modified = new Date(post.updated_at)
+            return {
+                url: `${siteUrl}/posts/${encodeURIComponent(post.slug)}`,
+                ...(!Number.isNaN(modified.getTime()) ? { lastModified: modified } : {}),
+                changeFrequency: 'monthly' as const,
+                priority: 0.8,
+            }
+        })]
+    } catch {
+        // Keep the portfolio discoverable during a temporary database outage.
+        console.warn('Sitemap: published posts unavailable; serving core pages')
+        return pages
+    }
 }

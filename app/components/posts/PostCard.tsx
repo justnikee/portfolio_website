@@ -4,7 +4,7 @@ import type { Post } from '@/app/lib/types'
 import { format } from 'date-fns'
 
 interface PostCardProps {
-    post: Post
+    post: Omit<Post, 'content'>
 }
 
 export default function PostCard({ post }: PostCardProps) {
@@ -18,6 +18,7 @@ export default function PostCard({ post }: PostCardProps) {
                             src={post.featured_image}
                             alt={post.title}
                             fill
+                            sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1023px) 50vw, 434px"
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         {post.category && (
