@@ -78,7 +78,7 @@ const Hero = () => {
       <div className="m-auto flex w-full max-w-[1440px] flex-1 flex-col justify-between">
         <h1
           ref={headline}
-          className="my-8 font-[MainFont] uppercase leading-[0.84] tracking-[-0.01em]"
+          className="hero-heading my-8 font-[MainFont] uppercase leading-[0.84] tracking-[-0.01em]"
           style={{ fontSize: "clamp(3.4rem, 14.5vw, 14rem)" }}
         >
           <span className="line-mask">

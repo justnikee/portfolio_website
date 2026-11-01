@@ -22,7 +22,7 @@ export default function LocalTime({ className = "" }: { className?: string }) {
 
   // Render a stable placeholder on the server to avoid hydration mismatch.
   return (
-    <span className={className} suppressHydrationWarning>
+    <span className={`inline-block min-w-[11ch] tabular-nums ${className}`} suppressHydrationWarning>
       {time || "--:--:--"} IST
     </span>
   );

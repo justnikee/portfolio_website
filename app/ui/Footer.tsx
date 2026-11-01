@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
           <span className="flex items-center gap-2 font-[outfit] text-sm text-[--ink-soft]">
             Built with Next.js &amp; GSAP
             <span
-              className="ml-1 inline-flex gap-1 text-[0.5rem] opacity-70 transition-opacity hover:opacity-100"
+              className="ml-1 inline-flex gap-1 text-[0.5rem]"
               title="Breaking Bad"
             >
               <ElementTile symbol="Br" number={35} name="Bromine" />

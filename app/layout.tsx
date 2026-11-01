@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import "./portfolio.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -11,6 +12,9 @@ import LoadingProvider from "./components/LoadingProvider";
 import CustomCursor from "./components/CustomCursor";
 import ParallaxController from "./components/ParallaxController";
 import { siteUrl, defaultSocialImage } from "./lib/site";
+
+const displayFont = localFont({ src: "./fonts/Neue Helvetica W04 89 Cm Heavy.woff2", variable: "--font-display", display: "swap", adjustFontFallback: "Arial" });
+const bodyFont = localFont({ src: "./fonts/Outfit-VariableFont_wght.woff2", variable: "--font-body", weight: "100 900", display: "swap", adjustFontFallback: "Arial" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -51,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <body className={`antialiased`}>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <CustomCursor />

@@ -43,7 +43,7 @@ html {
 body {
   color: var(--ink);
   background: var(--bg);
-  font-family: "outfit", Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
   position: relative;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
@@ -80,7 +80,6 @@ body::after {
 
 body.is-loading {
   overflow: hidden;
-  height: 100vh;
 }
 
 ::selection {
@@ -180,7 +179,7 @@ footer {
   position: relative;
   display: flex;
   white-space: nowrap;
-  font: min(34vw, 420px)/.9 "MainFont", sans-serif;
+  font: min(34vw, 420px)/.9 var(--font-display), sans-serif;
   letter-spacing: -.02em;
   color: var(--ink);
   will-change: transform;
@@ -245,7 +244,7 @@ footer {
 }
 
 .eyebrow {
-  font-family: "outfit", sans-serif;
+  font-family: var(--font-body), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.24em;
   font-size: 0.85rem;
@@ -347,16 +346,6 @@ footer {
    FONTS
    ============================================================ */
 @font-face {
-  font-family: "outfit";
-  src: url("./fonts/Outfit-VariableFont_wght.woff2") format("woff2");
-  font-display: swap;
-}
-@font-face {
-  font-family: "MainFont";
-  src: url("./fonts/Neue Helvetica W04 89 Cm Heavy.woff2") format("woff2");
-  font-display: swap;
-}
-@font-face {
   font-family: "Heading";
   src: url("./fonts/a95188992b6e1d54-s.p (1).woff") format("woff");
   font-display: swap;
@@ -397,7 +386,7 @@ footer {
 }
 
 .ticker__item {
-  font-family: "MainFont", sans-serif;
+  font-family: var(--font-display), sans-serif;
   text-transform: uppercase;
   font-size: clamp(1.4rem, 3.2vw, 2.6rem);
   letter-spacing: 0.01em;
@@ -494,7 +483,7 @@ footer {
 }
 
 .work-row__index {
-  font-family: "outfit", sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   color: var(--ink-faint);
@@ -502,7 +491,7 @@ footer {
 }
 
 .work-row__title {
-  font-family: "MainFont", sans-serif;
+  font-family: var(--font-display), sans-serif;
   text-transform: uppercase;
   font-size: clamp(1.9rem, 6vw, 4.6rem);
   line-height: 0.95;
@@ -513,7 +502,7 @@ footer {
 }
 
 .work-row__meta {
-  font-family: "outfit", sans-serif;
+  font-family: var(--font-body), sans-serif;
   text-align: right;
   font-size: 0.8rem;
   letter-spacing: 0.04em;
@@ -675,22 +664,22 @@ footer {
   padding: 0.15em 0.3em;
   border: 1px solid var(--accent);
   border-radius: 4px;
-  color: var(--accent);
+  color: var(--accent-2);
   line-height: 1;
-  font-family: "outfit", sans-serif;
+  font-family: var(--font-body), sans-serif;
   vertical-align: middle;
   transition:
     background-color 0.3s var(--ease),
     color 0.3s var(--ease);
 }
 .element-tile:hover {
-  background: var(--accent);
+  background: var(--accent-2);
   color: var(--bg);
 }
 .element-tile__num {
   font-size: 0.5em;
-  opacity: 0.85;
 }
+.heisenberg-toast .element-tile:hover { color: var(--ink); }
 .element-tile__sym {
   font-size: 1.05em;
   font-weight: 700;
@@ -712,7 +701,7 @@ footer {
   position: absolute;
   top: 0.04em;
   right: -0.62em;
-  font-family: "outfit", sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 0.24em;
   font-weight: 600;
   letter-spacing: 0;
@@ -721,6 +710,7 @@ footer {
 
 /* easter egg toast */
 .heisenberg-toast {
+  --accent-2: #ee5938;
   position: fixed;
   left: 50%;
   bottom: 2rem;
@@ -733,7 +723,7 @@ footer {
   background: var(--ink);
   color: var(--bg);
   border-radius: 10px;
-  font-family: "MainFont", sans-serif;
+  font-family: var(--font-display), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 1.1rem;
