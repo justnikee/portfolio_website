@@ -1,49 +1,36 @@
-import Image from "next/image";
-import { ElementTile } from "../components/ElementTile";
+import TornPaperEdge from "../components/TornPaperEdge";
 
-const Experience = () => {
+const contributions = [
+  { title: "Design → interface", text: "Turn designs and client requirements into working web experiences." },
+  { title: "Across screen sizes", text: "Build responsive interfaces that adapt from mobile to desktop." },
+  { title: "Part of the team", text: "Contribute frontend development to shared client projects and delivery." },
+];
+
+export default function Experience() {
   return (
-    <section id="MoreAboutMe" className="px-5 py-24 sm:px-8 sm:py-32">
-      <div className="m-auto max-w-[1400px]">
-        <div className="mb-12 flex items-center gap-4">
-          <ElementTile symbol="Fe" number={26} name="Iron" className="text-[0.6rem]" />
-          <span className="eyebrow">Currently</span>
+    <section id="Experience" className="portfolio-section experience-section">
+      <div className="portfolio-container">
+        <div className="experience-intro">
+          <span className="eyebrow">03 / Professional experience</span>
+          <h2>Real briefs.<br /><span>Working interfaces.</span></h2>
+          <p>Client work has taught me to connect the details of an interface with the requirements behind it.</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-          <h2 className="col-span-1 font-[MainFont] text-[2.2rem] uppercase leading-[1.02] tracking-[-0.01em] sm:text-[3.4rem] lg:col-span-7 lg:text-[4.2rem]">
-            <span className="block">Building storefronts</span>
-            <span className="block">
-              at <span className="accent-text">Cybergineer.</span>
-            </span>
-          </h2>
-
-          <div className="col-span-1 flex flex-col justify-end lg:col-span-5">
-            <p className="mb-6 font-[outfit] body-text">
-              These days I build tailored e-commerce stores alongside the
-              e-commerce team at Cybergineer Solutions — shipping for clients
-              across the US, UK and Israel.
-            </p>
-            <p className="mb-8 font-[outfit] body-text">
-              Before that, a stretch of freelance work: revamps, core products
-              and the occasional rescue job.
-            </p>
-            <div>
-              <span className="eyebrow block">Worked with</span>
-              <div className="mt-3 inline-block rounded py-3">
-                <Image
-                  alt="Cybergineer Solutions"
-                  height={42}
-                  width={92}
-                  src={"/main_images/web-logo-removebg-preview.png"}
-                />
-              </div>
+        <article className="employment">
+          <div className="employment__rail"><span className="employment__dot" /><span>Currently</span></div>
+          <div className="employment__content">
+            <div className="employment__heading">
+              <div><span className="employment__label">Company</span><h3>Cybergineer<br />Solutions<span className="accent-text">.</span></h3></div>
+              <div className="employment__role"><span className="employment__label">My role</span><p>Frontend<br />development</p><span className="employment__arrow" aria-hidden="true">↗</span></div>
+            </div>
+            <p className="employment__summary">I work with the team to build responsive interfaces, turning designs and client requirements into working web experiences.</p>
+            <div className="employment__contributions">
+              {contributions.map((item, index) => <div key={item.title}><span className="employment__label">0{index + 1}</span><h4>{item.title}</h4><p>{item.text}</p></div>)}
             </div>
           </div>
-        </div>
+        </article>
       </div>
+      <TornPaperEdge position="bottom" />
     </section>
   );
-};
-
-export default Experience;
+}

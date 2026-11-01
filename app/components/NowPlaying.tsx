@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 type NP = {
   configured: boolean;
   isPlaying: boolean;
+  unavailable?: boolean;
   title?: string;
   artist?: string;
   album?: string;
@@ -23,20 +24,30 @@ const NowPlaying = () => {
 
   useEffect(() => {
     let alive = true;
+    let controller: AbortController | null = null;
+    let fetching = false;
     const load = async () => {
+      if (document.hidden || fetching) return;
+      fetching = true;
+      controller = new AbortController();
       try {
-        const res = await fetch("/api/now-playing", { cache: "no-store" });
+        const res = await fetch("/api/now-playing", { cache: "no-store", signal: controller.signal });
+        if (!res.ok) throw new Error("Music unavailable");
         const json = (await res.json()) as NP;
         if (alive) setData(json);
       } catch {
-        if (alive) setData({ configured: false, isPlaying: false });
-      }
+        if (alive) setData({ configured: false, isPlaying: false, unavailable: true });
+      } finally { fetching = false; }
     };
     load();
     const id = setInterval(load, 30000);
+    const onVisible = () => { if (!document.hidden) void load(); };
+    document.addEventListener("visibilitychange", onVisible);
     return () => {
       alive = false;
       clearInterval(id);
+      controller?.abort();
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, []);
 
@@ -45,18 +56,19 @@ const NowPlaying = () => {
     ? "Now playing"
     : data?.title
     ? "Last played"
-    : "Now playing";
+    : "Listening";
 
   return (
-    <div>
+    <div className="music-widget">
       <span className="eyebrow mb-3 flex items-center gap-2">
         <SpotifyMark /> {label}
       </span>
       <a
         href={data?.songUrl || "https://open.spotify.com"}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         data-cursor="hover"
+        data-cursor-label="Listen"
         className="now-playing"
       >
         {data?.albumImageUrl ? (
@@ -65,6 +77,9 @@ const NowPlaying = () => {
             src={data.albumImageUrl}
             alt={data.album || "Album art"}
             className="now-playing__art"
+            width={56}
+            height={56}
+            loading="lazy"
           />
         ) : (
           <span className="now-playing__art now-playing__art--empty">
@@ -74,10 +89,10 @@ const NowPlaying = () => {
 
         <div className="min-w-0 flex-1">
           <p className="truncate font-[outfit] text-sm font-medium text-[--ink]">
-            {data?.title || "Not playing right now"}
+            {data?.title || (!data ? "Checking Spotify…" : data.unavailable ? "Listen on Spotify" : "Nothing playing right now")}
           </p>
           <p className="truncate font-[outfit] text-xs text-[--ink-soft]">
-            {data?.artist || "Catch me on Spotify"}
+            {data?.artist || "A soundtrack for the work."}
           </p>
         </div>
 
@@ -87,6 +102,7 @@ const NowPlaying = () => {
           <span />
           <span />
         </span>
+        <span className="now-playing__arrow" aria-hidden="true">↗</span>
       </a>
     </div>
   );

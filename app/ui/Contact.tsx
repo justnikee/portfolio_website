@@ -20,16 +20,17 @@ const Contact = () => {
   };
 
   return (
-    <section id="Contact" className="px-5 py-24 sm:px-8 sm:py-32">
-      <div className="m-auto max-w-[1400px]">
+    <section id="Contact" className="portfolio-section">
+      <div className="m-auto max-w-[1440px]">
         <div className="mb-12 flex items-center gap-4">
           <ElementTile symbol="Cu" number={29} name="Copper" className="text-[0.6rem]" />
           <span className="eyebrow">Contact</span>
         </div>
 
         <p className="mb-8 max-w-2xl font-[outfit] body-text">
-          Got something worth cooking? I&apos;m open to new work, collaborations
-          and the occasional chat about cats or the meaning of life.
+          Have a product to build or an opportunity to share? I&apos;d love to
+          talk about frontend and full-stack work, thoughtful web experiences,
+          and practical uses of AI.
         </p>
 
         <h2 className="font-[MainFont] uppercase leading-[0.9] tracking-[-0.02em]">
@@ -43,7 +44,7 @@ const Contact = () => {
             className="block accent-text"
             style={{ fontSize: "clamp(2.6rem, 11vw, 9rem)" }}
           >
-            worth serving.
+            that matters.
           </span>
         </h2>
 
@@ -51,18 +52,20 @@ const Contact = () => {
           <a
             href="mailto:contact@doitnikhil.in"
             data-cursor="text"
-            data-cursor-label="Copy"
+            data-cursor-label="Email"
             className="link-underline font-[MainFont] text-2xl uppercase tracking-tight sm:text-5xl"
           >
             <span ref={emailRef}>contact@doitnikhil.in</span>
           </a>
           <Magnetic strength={0.4}>
             <button
+              type="button"
+              data-cursor-label={copyText}
               onClick={handleCopy}
               data-cursor="hover"
               className="copy_button rounded-full px-7 py-3 font-[outfit] text-sm uppercase tracking-[0.12em]"
             >
-              {copyText}
+              <span aria-live="polite">{copyText}</span>
             </button>
           </Magnetic>
         </div>

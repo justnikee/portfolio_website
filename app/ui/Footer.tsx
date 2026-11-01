@@ -4,7 +4,7 @@ import React from "react";
 import FooterLinks from "../components/FooterLinks";
 import { links, socialLinks } from "../data/footerlinks";
 import LocalTime from "../components/LocalTime";
-import SpotifyEmbed from "../components/SpotifyEmbed";
+import NowPlaying from "../components/NowPlaying";
 import { ElementTile } from "../components/ElementTile";
 import { usePathname } from "next/navigation";
 
@@ -17,18 +17,18 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <footer className="overflow-hidden px-5 pb-8 pt-24 sm:px-8 sm:pt-32">
-      <div className="m-auto max-w-[1500px]">
+    <footer className="overflow-hidden px-5 pb-8 pt-12 sm:px-8 sm:pt-16">
+      <div className="m-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-12 border-t border-[--line] pt-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <h3 className="mb-3 font-[outfit] text-3xl font-semibold">
               Nikhil Thakur
             </h3>
             <p className="mb-7 max-w-xs font-[outfit] body-text">
-              Frontend developer at Cybergineer Solutions. Open for side-projects
-              and collaborations.
+              Frontend developer building full-stack products. Currently
+              developing Anviora, a battery digital product passport platform.
             </p>
-            <SpotifyEmbed />
+            <NowPlaying />
           </div>
 
           <div className="md:col-span-4" />
@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
         </h2>
       </div>
 
-      <div className="m-auto max-w-[1500px]">
+      <div className="m-auto max-w-[1440px]">
         <div className="flex flex-col items-start justify-between gap-3 border-t border-[--line] pt-6 sm:flex-row sm:items-center">
           <span className="font-[outfit] text-sm text-[--ink-soft]">
             © 2026 Nikhil Thakur
@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
             <LocalTime /> — Chandigarh, India
           </span>
           <span className="flex items-center gap-2 font-[outfit] text-sm text-[--ink-soft]">
-            Cooked with Next.js &amp; GSAP
+            Built with Next.js &amp; GSAP
             <span
               className="ml-1 inline-flex gap-1 text-[0.5rem] opacity-70 transition-opacity hover:opacity-100"
               title="Breaking Bad"

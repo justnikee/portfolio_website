@@ -1,109 +1,73 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const PANELS = 6;
+type Props = { onReveal: () => void; onComplete: () => void };
 
-export default function Preloader({ onComplete }: { onComplete: () => void }) {
+export default function Preloader({ onReveal, onComplete }: Props) {
   const root = useRef<HTMLDivElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
-  const panelsRef = useRef<HTMLDivElement>(null);
-  const [count, setCount] = useState(0);
+  const backdrop = useRef<HTMLDivElement>(null);
+  const word = useRef<HTMLDivElement>(null);
 
   useGSAP(
-    () => {
-      const counter = { value: 0 };
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.inOut" },
-        onComplete,
+    (context) => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        onComplete();
+        return;
+      }
+
+      let active = true;
+      // Measure with the real display font so the final word fits the logo.
+      document.fonts.ready.then(() => {
+        if (!active) return;
+        context.add(() => {
+          const letters = root.current!.querySelectorAll("[data-preloader-letter]");
+          const logo = document.querySelector<HTMLElement>("[data-preloader-logo]");
+          const timeline = gsap.timeline({ onComplete });
+
+          if (logo) gsap.set(logo, { visibility: "hidden" });
+          gsap.set(word.current, { transformOrigin: "top left" });
+          timeline.fromTo(letters,
+            { y: 0, yPercent: 115, rotation: 5, autoAlpha: 0 },
+            { y: 0, yPercent: 0, rotation: 0, autoAlpha: 1, duration: 0.7, stagger: 0.055, ease: "power4.out" },
+            0.05
+          );
+
+          if (logo) {
+            // Resolve destination at the moment of travel, including mobile layout.
+            timeline.to(word.current, {
+              x: () => logo.getBoundingClientRect().left - word.current!.getBoundingClientRect().left,
+              y: () => logo.getBoundingClientRect().top - word.current!.getBoundingClientRect().top,
+              scale: () => logo.getBoundingClientRect().width / word.current!.getBoundingClientRect().width,
+              duration: 0.85,
+              ease: "expo.inOut",
+            }, 1.05);
+          } else {
+            timeline.to(word.current, { opacity: 0, duration: 0.6 }, 1.05);
+          }
+
+          timeline.call(onReveal, [], 1.15)
+            .to(backdrop.current, { opacity: 0, duration: 0.65, ease: "power2.inOut" }, 1.15);
+          if (logo) timeline.set(logo, { visibility: "visible" }, 1.9);
+        });
       });
 
-      // intro lines rise
-      tl.from("[data-pre-line]", {
-        yPercent: 115,
-        duration: 0.9,
-        stagger: 0.08,
-        ease: "power4.out",
-      });
-
-      // count + bar
-      tl.to(
-        counter,
-        {
-          value: 100,
-          duration: 2.3,
-          ease: "power2.inOut",
-          onUpdate: () => setCount(Math.round(counter.value)),
-        },
-        0.2
-      );
-      tl.fromTo(
-        barRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 2.3, ease: "power2.inOut" },
-        0.2
-      );
-
-      // lift the content away
-      tl.to(
-        innerRef.current,
-        { yPercent: -120, opacity: 0, duration: 0.7, ease: "power3.in" },
-        "+=0.15"
-      );
-
-      // espresso panels sweep up, revealing the bone page
-      tl.to(
-        panelsRef.current?.children ?? [],
-        {
-          scaleY: 0,
-          duration: 0.95,
-          ease: "power4.inOut",
-          stagger: 0.07,
-          transformOrigin: "top",
-        },
-        "-=0.2"
-      );
+      return () => { active = false; };
     },
     { scope: root }
   );
 
   return (
-    <div ref={root} className="preloader">
-      <div ref={panelsRef} className="reveal-panels">
-        {Array.from({ length: PANELS }).map((_, i) => (
-          <div key={i} className="reveal-panel" />
+    <div ref={root} className="preloader" role="status" aria-label="Loading portfolio">
+      <div ref={backdrop} className="preloader__backdrop" />
+      <div ref={word} className="preloader__word" aria-hidden="true">
+        {"NIKHIL".split("").map((letter, index) => (
+          <span key={index} className="preloader__mask"><span data-preloader-letter className="preloader__letter">{letter}</span></span>
         ))}
+        <span className="preloader__mask"><span data-preloader-letter className="preloader__letter accent-text">.</span></span>
       </div>
-
-      <div ref={innerRef} className="preloader__inner">
-        <div className="mb-6 flex items-center justify-end">
-          <span className="preloader__meta overflow-hidden">
-            <span data-pre-line className="inline-block">
-              Chandigarh, IN
-            </span>
-          </span>
-        </div>
-
-        <div className="overflow-hidden">
-          <h1 data-pre-line className="preloader__name inline-block">
-            Nikhil
-          </h1>
-        </div>
-
-        <div className="preloader__row mt-6">
-          <span className="preloader__meta overflow-hidden">
-            <span data-pre-line className="inline-block">
-              Mise en place — plating the experience
-            </span>
-          </span>
-          <span className="preloader__count">{count}</span>
-        </div>
-      </div>
-
-      <div ref={barRef} className="preloader__bar" />
     </div>
   );
 }

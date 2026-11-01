@@ -22,19 +22,23 @@ export default function LoadingProvider({
   children: React.ReactNode;
 }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(true);
 
   // Lock body scroll while the preloader is on screen.
   useEffect(() => {
-    if (isLoading) {
+    if (showPreloader) {
       document.body.classList.add("is-loading");
     } else {
       document.body.classList.remove("is-loading");
     }
-  }, [isLoading]);
+  }, [showPreloader]);
 
   return (
     <LoadingContext.Provider value={{ isLoading }}>
-      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      {showPreloader && <Preloader
+        onReveal={() => setIsLoading(false)}
+        onComplete={() => { setIsLoading(false); setShowPreloader(false); }}
+      />}
       {children}
     </LoadingContext.Provider>
   );

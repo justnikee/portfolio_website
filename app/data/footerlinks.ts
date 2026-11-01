@@ -2,19 +2,19 @@
 const links = [
   {
     title: "About",
-    link: "#About",
+    link: "/#About",
   },
   {
     title: "Work",
-    link: "#Work",
+    link: "/#Work",
   },
   {
-    title: "Pantry",
-    link: "#Uses",
+    title: "Experience",
+    link: "/#Experience",
   },
   {
     title: "Contact",
-    link: "#Contact",
+    link: "/#Contact",
   },
   {
     title: "Posts",

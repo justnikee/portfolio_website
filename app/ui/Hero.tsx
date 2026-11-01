@@ -21,6 +21,12 @@ const Hero = () => {
         return;
       }
 
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set("[data-h-line], [data-h-fade]", { clearProps: "all" });
+        gsap.set(headline.current, { clearProps: "all" });
+        return;
+      }
+
       const tl = gsap.timeline({
         defaults: { ease: "expo.out" },
         delay: 0.15,
@@ -47,7 +53,7 @@ const Hero = () => {
       // headline drifts up subtly on scroll — desktop only, so mobile
       // sections stay put (no floating on scroll)
       const mm = gsap.matchMedia();
-      mm.add("(min-width: 768px)", () => {
+      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
         gsap.to(headline.current, {
           yPercent: -14,
           ease: "none",
@@ -59,6 +65,7 @@ const Hero = () => {
           },
         });
       });
+      return () => mm.revert();
     },
     { dependencies: [isLoading], scope: root }
   );
@@ -66,18 +73,17 @@ const Hero = () => {
   return (
     <section
       ref={root}
-      className="relative flex min-h-[100svh] flex-col px-5 pb-8 pt-[120px] sm:px-8 sm:pb-10"
+      className="relative flex min-h-[85svh] flex-col px-5 pb-10 pt-[120px] sm:px-8 sm:pb-14"
     >
-      <div className="m-auto flex w-full max-w-[1400px] flex-1 flex-col justify-between">
-        {/* headline */}
+      <div className="m-auto flex w-full max-w-[1440px] flex-1 flex-col justify-between">
         <h1
           ref={headline}
           className="my-8 font-[MainFont] uppercase leading-[0.84] tracking-[-0.01em]"
-          style={{ fontSize: "clamp(3.4rem, 15.5vw, 17rem)" }}
+          style={{ fontSize: "clamp(3.4rem, 14.5vw, 14rem)" }}
         >
           <span className="line-mask">
             <span data-h-line className="reveal-up">
-              I Cook
+              I build
             </span>
           </span>
           <span className="line-mask">
@@ -86,40 +92,21 @@ const Hero = () => {
             </span>
           </span>
           <span className="line-mask">
-            <span data-h-line className="reveal-up outline-word">
+            <span data-h-line className="reveal-up accent-text">
               The Web
             </span>
           </span>
         </h1>
 
         {/* bottom row */}
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <p data-h-fade className="max-w-md font-[outfit] body-text">
-            I&apos;m Nikhil — a frontend developer from India plating fast,
-            accessible and story-driven interfaces with Next.js, React and
-            Node. Three years in the kitchen and counting.
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <p data-h-fade className="max-w-xl font-[outfit] body-text">
+            I&apos;m Nikhil, a frontend developer building full-stack products.
+            I&apos;m currently developing a battery digital product passport
+            platform for Indian manufacturers
+            and exporters.
           </p>
-          <a
-            data-h-fade
-            href="#Work"
-            data-cursor="hover"
-            className="group inline-flex w-fit items-center gap-3 font-[outfit] text-sm uppercase tracking-[0.18em]"
-          >
-            <span className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[--ink] transition-colors duration-500 group-hover:bg-[--ink]">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="transition-colors duration-500 group-hover:stroke-[--bg]"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 5v14M5 12l7 7 7-7" />
-              </svg>
-            </span>
-            View selected work
-          </a>
+          <a data-h-fade href="#Contact" className="text-link whitespace-nowrap">Get in touch ↗</a>
         </div>
       </div>
     </section>

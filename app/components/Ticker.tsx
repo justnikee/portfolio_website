@@ -3,11 +3,10 @@ import React from "react";
 const items = [
   "Next.js",
   "React",
-  "Shopify",
-  "GSAP",
   "Node",
   "TypeScript",
-  "Liquid",
+  "Product development",
+  "GSAP",
   "Tailwind",
 ];
 

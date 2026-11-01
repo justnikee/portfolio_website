@@ -26,6 +26,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 1,
         },
         {
+            url: `${baseUrl}/work/anviora`,
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
             url: `${baseUrl}/posts`,
             lastModified: new Date(),
             changeFrequency: 'daily',

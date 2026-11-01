@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./portfolio.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -11,13 +12,13 @@ import CustomCursor from "./components/CustomCursor";
 import ParallaxController from "./components/ParallaxController";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nikhil-portfolio.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://doitnikhil.in"),
   title: {
-    default: "Nikhil Thakur — Cooking Things For Web",
+    default: "Nikhil Thakur — Developer & Product Builder",
     template: "%s | Nikhil Thakur",
   },
   description:
-    "Nikhil Thakur is a frontend developer from India crafting engaging, accessible and visually striking web experiences with Next.js, React and Node.js.",
+    "Frontend developer building full-stack products. Explore Nikhil Thakur’s web projects, commerce experience, and independent battery digital product passport platform.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -48,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <CustomCursor />
         <LoadingProvider>
           <Header />

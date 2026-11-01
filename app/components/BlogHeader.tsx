@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 export default function BlogHeader() {
@@ -16,14 +15,8 @@ export default function BlogHeader() {
                 >
                     {/* Left: Branding */}
                     <div className="flex items-center gap-4">
-                        <Link href="/" className="flex items-center group">
-                            <Image
-                                src="/main_images/NIKHIL.png"
-                                alt="Nikhil"
-                                width={90}
-                                height={40}
-                                className="object-contain opacity-80 brightness-0 group-hover:opacity-100 transition-opacity"
-                            />
+                        <Link href="/" aria-label="Nikhil — home" className="flex items-center group">
+                            <span data-preloader-logo className="site-wordmark" aria-hidden="true">Nikhil<span className="accent-text">.</span></span>
                         </Link>
 
                         {/* Breadcrumb / Separator */}
