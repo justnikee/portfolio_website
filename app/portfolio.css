@@ -260,6 +260,13 @@ a, button { -webkit-tap-highlight-color: transparent; }
   transform-origin: left;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .footer-wordmark {
+    transform: translateY(var(--footer-wordmark-offset, 0%));
+    transition: transform 400ms cubic-bezier(.22, 1, .36, 1);
+  }
+}
+
 /* Keep long code and embedded media inside the article column. */
 .post-content { overflow-wrap: anywhere; }
 .post-content pre { overflow-x: auto; overflow-wrap: normal; }

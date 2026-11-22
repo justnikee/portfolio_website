@@ -1,15 +1,55 @@
 "use client";
 
-import React from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FooterLinks from "../components/FooterLinks";
 import { links, socialLinks } from "../data/footerlinks";
 import LocalTime from "../components/LocalTime";
 import NowPlaying from "../components/NowPlaying";
 import { ElementTile } from "../components/ElementTile";
 import { usePathname } from "next/navigation";
+import { useLoading } from "../components/LoadingProvider";
 
-const Footer: React.FC = () => {
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+export default function Footer() {
   const pathname = usePathname();
+  const { isLoading } = useLoading();
+  const wordmarkFrame = useRef<HTMLDivElement>(null);
+  const wordmark = useRef<HTMLHeadingElement>(null);
+
+  useGSAP(() => {
+    const frame = wordmarkFrame.current;
+    const type = wordmark.current;
+    if (isLoading || !frame || !type) return;
+
+    const motion = gsap.matchMedia();
+    motion.add("(prefers-reduced-motion: no-preference)", () => {
+      const updateWordmark = ({ progress }: ScrollTrigger) => {
+        // Use the same 55% span, shifted later to keep the credits edge in view.
+        const position = gsap.utils.clamp(0, 1, (progress - 0.4) / 0.55);
+        const easedProgress = position * position * (3 - 2 * position);
+        const offset = (1 - easedProgress) * 105;
+        type.style.setProperty("--footer-wordmark-offset", `${offset.toFixed(3)}%`);
+      };
+
+      ScrollTrigger.create({
+        trigger: frame,
+        start: "top bottom",
+        end: "max",
+        onRefresh: updateWordmark,
+        onUpdate: updateWordmark,
+      });
+
+      return () => {
+        type.style.removeProperty("--footer-wordmark-offset");
+      };
+    });
+
+    return () => motion.revert();
+  }, { dependencies: [pathname, isLoading], revertOnUpdate: true });
 
   // Skip footer on admin routes
   if (pathname?.startsWith('/admin')) {
@@ -46,10 +86,10 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Full-bleed wordmark */}
-      <div className="relative mt-16 w-screen -translate-x-5 overflow-hidden sm:-translate-x-8">
+      <div ref={wordmarkFrame} className="-mx-5 mt-16 overflow-hidden sm:-mx-8">
         <h2
-          className="select-none whitespace-nowrap text-center font-[MainFont] uppercase leading-[0.74] tracking-[-0.02em] text-[--ink]"
+          ref={wordmark}
+          className="footer-wordmark select-none whitespace-nowrap text-center font-[MainFont] uppercase leading-[0.74] tracking-[-0.02em] text-[--ink]"
           style={{ fontSize: "clamp(5rem, 27vw, 30rem)" }}
         >
           Nikhil<span className="accent-text">.</span>
@@ -57,7 +97,7 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="m-auto max-w-[1440px]">
-        <div className="flex flex-col items-start justify-between gap-3 border-t border-[--line] pt-6 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 pt-6 sm:flex-row sm:items-center">
           <span className="font-[outfit] text-sm text-[--ink-soft]">
             © 2026 Nikhil Thakur
           </span>
@@ -78,6 +118,4 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
