@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const root = useRef<HTMLElement>(null);
+  const headlineWrap = useRef<HTMLDivElement>(null);
   const headline = useRef<HTMLHeadingElement>(null);
   const { isLoading } = useLoading();
 
@@ -54,7 +55,7 @@ const Hero = () => {
       // sections stay put (no floating on scroll)
       const mm = gsap.matchMedia();
       mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-        gsap.to(headline.current, {
+        gsap.to(headlineWrap.current, {
           yPercent: -14,
           ease: "none",
           scrollTrigger: {
@@ -73,34 +74,35 @@ const Hero = () => {
   return (
     <section
       ref={root}
-      className="relative flex min-h-[85svh] flex-col px-5 pb-10 pt-[120px] sm:px-8 sm:pb-14"
+      className="relative flex flex-col px-5 pb-8 pt-[104px] sm:min-h-[85svh] sm:px-8 sm:pb-14 sm:pt-[120px]"
     >
-      <div className="m-auto flex w-full max-w-[1440px] flex-1 flex-col justify-between">
-        <h1
-          ref={headline}
-          className="hero-heading my-8 font-[MainFont] uppercase leading-[0.84] tracking-[-0.01em]"
-          style={{ fontSize: "clamp(3.4rem, 14.5vw, 14rem)" }}
-        >
-          <span className="line-mask">
-            <span data-h-line className="reveal-up">
-              I build
+      <div className="m-auto flex w-full max-w-[1440px] flex-1 flex-col sm:justify-between">
+        <div ref={headlineWrap} className="my-5 sm:my-8">
+          <h1
+            ref={headline}
+            className="hero-heading font-[MainFont] uppercase leading-[0.84] tracking-[-0.01em]"
+          >
+            <span className="line-mask">
+              <span data-h-line className="reveal-up">
+                I build
+              </span>
             </span>
-          </span>
-          <span className="line-mask">
-            <span data-h-line className="reveal-up">
-              Things <span className="">For</span>
+            <span className="line-mask">
+              <span data-h-line className="reveal-up">
+                Things <span className="">For</span>
+              </span>
             </span>
-          </span>
-          <span className="line-mask">
-            <span data-h-line className="reveal-up accent-text">
-              The Web
+            <span className="line-mask">
+              <span data-h-line className="reveal-up accent-text">
+                The Web
+              </span>
             </span>
-          </span>
-        </h1>
+          </h1>
+        </div>
 
         {/* bottom row */}
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <p data-h-fade className="max-w-xl font-[outfit] body-text">
+        <div className="flex flex-col gap-5 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <p data-h-fade className="hero-intro max-w-xl font-[outfit] body-text">
             I&apos;m Nikhil, a frontend developer building full-stack products.
             I&apos;m currently developing a battery digital product passport
             platform for Indian manufacturers

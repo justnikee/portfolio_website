@@ -1,6 +1,7 @@
 import Link from "next/link";
 import WorkList from "../components/WorkList";
 import PassportVisual from "../components/PassportVisual";
+import { anvioraPreviewUrl } from "../lib/site";
 
 export default function Work() {
   return (
@@ -26,12 +27,17 @@ export default function Work() {
             </div>
             <h3 className="project-heading">Anviora<span className="accent-text">.</span></h3>
             <p className="project-subtitle">Battery digital product passports.</p>
-            <p className="body-text">A platform I&apos;m building solo for Indian battery manufacturers and exporters. My move from delivering websites to developing a product end to end.</p>
+            <p className="body-text">I&apos;m building Anviora to help Indian battery manufacturers and exporters turn battery specs, supplier records, and test reports into QR-linked digital product passports.</p>
             <dl className="project-facts">
               <div><dt>My role</dt><dd>Solo developer</dd></div>
               <div><dt>Focus</dt><dd>Full-stack product development</dd></div>
             </dl>
-            <Link href="/work/anviora" className="button-link">Read the case study <span aria-hidden="true">↗</span></Link>
+            <div className="featured-project__actions">
+              <Link href="/work/anviora" className="button-link">Read the case study <span aria-hidden="true">↗</span></Link>
+              <a href={anvioraPreviewUrl} target="_blank" rel="noopener noreferrer" className="text-link">
+                Preview Anviora <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
             <p className="fine-print">Anviora is the working name. The product is still evolving.</p>
           </div>
         </article>

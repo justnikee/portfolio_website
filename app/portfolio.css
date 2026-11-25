@@ -32,7 +32,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .project-facts { display: flex; flex-wrap: wrap; gap: 18px 40px; grid-column: 1; margin-top: 10px; }
 .project-facts dt, .case-facts dt { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
 .project-facts dd, .case-facts dd { font-size: 14px; }
-.featured-project__copy .button-link { grid-column: 2; grid-row: 4; width: fit-content; }
+.featured-project__actions { grid-column: 2; grid-row: 4; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
 .featured-project__copy > .fine-print { grid-column: 1 / -1; margin-top: 8px; }
 .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 30px; padding-top: 28px; }
 .project-card { min-width: 0; }
@@ -93,10 +93,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .case-direction { background: var(--ink); color: var(--bg); padding: 48px; margin-top: 64px; }
 .case-direction .eyebrow { color: #beb6a5; }
 .case-direction .body-text { color: #d3cbbb; }
-.direction-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 36px; }
-.direction-grid > div { border-top: 1px solid #e7e1d344; padding-top: 24px; }
-.direction-grid h3 { font: 2.4rem/1 var(--font-display),sans-serif; text-transform: uppercase; margin: 22px 0 14px; }
-.direction-grid p { font-size: 16px; line-height: 1.65; color: #d3cbbb; }
 .case-note { border-left: 3px solid var(--accent); padding: 4px 0 4px 22px; margin-top: 32px; font-size: 15px; }
 .case-note strong { color: var(--ink); display: block; margin-bottom: 8px; }
 .case-end { display: flex; justify-content: space-between; gap: 24px; padding-top: 36px; }
@@ -144,7 +140,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .case-section { padding: 56px 0; }
   .case-prose { font-size: 16px; }
   .case-direction { padding: 28px 22px; margin-top: 48px; }
-  .direction-grid { grid-template-columns: 1fr; gap: 30px; }
+  .case-direction .section-intro { margin-bottom: 0; }
   .case-nav { gap: 18px 24px; }
 }
 
@@ -277,5 +273,10 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .font-\[MainFont\] { font-family: var(--font-display), sans-serif; }
 .font-\[outfit\] { font-family: var(--font-body), sans-serif; }
 /* Fallback fonts must not wrap the three deliberate hero lines. */
+.hero-heading { font-size: clamp(3.4rem, 14.5vw, 14rem); }
 .hero-heading .line-mask { white-space: nowrap; }
+@media (max-width: 639px) {
+  .hero-heading { font-size: min(23vw, 5.8rem); }
+  .hero-intro { font-size: 1.0625rem; }
+}
 .now-playing { min-height: 86px; }
